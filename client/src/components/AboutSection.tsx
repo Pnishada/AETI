@@ -19,13 +19,11 @@ export default function AboutSection() {
           {/* Right Content */}
           <div className="order-1 lg:order-2 space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900" data-testid="text-about-title">
-              About IETI
+              About AETI
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed" data-testid="text-about-description">
-              The Industrial Engineering Training Institute (IETI) is a nationally recognized institute operating under the National Apprentice and Industrial Training Authority (NAITA) in Sri Lanka. 
-              IETI plays a key role in advancing technical and vocational education by providing high-quality training programs in industrial engineering and related fields.
-              With a strong focus on practical skills and industry relevance, IETI equips trainees with the knowledge and expertise needed to meet the growing demands of the industrial sector, 
-              while also contributing to national workforce development.
+              The Automobile Engineering Training Institute (AETI) is a leading government technical training institute in Sri Lanka, functioning under the National Apprentice and Industrial Training Authority (NAITA).
+               Established to meet the growing demand for skilled automobile technicians, AETI provides specialized training programs in automobile engineering and related technologies.
             </p>
             
             <Link href="/about">
