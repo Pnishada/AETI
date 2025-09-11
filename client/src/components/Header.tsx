@@ -65,7 +65,7 @@ export default function Header() {
               <GraduationCap className="text-red-800 w-5 h-5" />
             </div>
             <span className="text-xl font-extrabold tracking-wide">
-              IETI
+              AETI
             </span>
           </Link>
 

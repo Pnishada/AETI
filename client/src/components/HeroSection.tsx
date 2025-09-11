@@ -41,18 +41,19 @@ export default function HeroSection() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-                Building a Skilled Nation with IETI
+                Founded for skill. Built for industry.
               </h1>
               <p className="text-lg text-slate-600 leading-relaxed">
-                Industrial Engineering Training Institute (IETI)
+                Automobile Engineering Training Institute (AETI)
               </p>
             </div>
 
+            {/* Government Red Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-medium transition-colors">
+              <Button className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors">
                 Explore Programs
               </Button>
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-3 rounded-lg font-medium transition-colors">
+              <Button className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors">
                 Apply Online
               </Button>
             </div>
@@ -60,25 +61,24 @@ export default function HeroSection() {
 
           {/* Right Content - Slider */}
           <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[16/9] sm:aspect-[4/3]">
-  <Swiper
-    modules={[Pagination, Autoplay]}
-    pagination={{ clickable: true }}
-    autoplay={{ delay: 3000 }}
-    loop={true}
-    className="w-full h-full"
-  >
-    {images.map((img, i) => (
-      <SwiperSlide key={i}>
-        <img
-          src={img.src}
-          alt={img.alt}
-          className="w-full h-full object-cover rounded-2xl"
-        />
-      </SwiperSlide>
-    ))}
-  </Swiper>
-</div>
-
+            <Swiper
+              modules={[Pagination, Autoplay]}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000 }}
+              loop={true}
+              className="w-full h-full"
+            >
+              {images.map((img, i) => (
+                <SwiperSlide key={i}>
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </section>

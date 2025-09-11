@@ -10,6 +10,7 @@ import ProgramDetails from "./pages/programs/[id]";
 import NewsPage from "./pages/news";
 import NewsDetails from "./pages/news/[id]";
 
+
 function Router() {
   return (
     <Switch>
