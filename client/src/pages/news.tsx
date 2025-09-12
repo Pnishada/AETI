@@ -1,19 +1,31 @@
 import { useState } from "react";
-import NewsCard from "@/components/NewsCard";
-import { NewsArticle } from "@/types/news";
-import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Search } from "lucide-react";
 
+// TypeScript type for news articles
+export interface NewsArticle {
+  id: number;
+  title: string;
+  content: string;
+  date: string;
+  category: string;
+  image: string;
+  featured: boolean;
+}
+
+// Actual news data
 const newsData: NewsArticle[] = [
   {
     id: 1,
-    title: "IETI Computer Graphic Designer",
-    content: "Building a Skilled Nation with IETI...",
+    title: "AETI Computer Graphic Designer",
+    content: "Building a Skilled Nation with AETI...",
     date: "2025-09-10",
     category: "Technology",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80",
     featured: true,
   },
   {
@@ -22,7 +34,8 @@ const newsData: NewsArticle[] = [
     content: "Celebrating the achievements of our graduates...",
     date: "2025-08-20",
     category: "Events",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1588075592446-265f3730b2d6?auto=format&fit=crop&w=1000&q=80",
     featured: true,
   },
   {
@@ -31,7 +44,18 @@ const newsData: NewsArticle[] = [
     content: "Introducing advanced training programs...",
     date: "2025-09-05",
     category: "Programs",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80",
+    featured: false,
+  },
+  {
+    id: 4,
+    title: "AI Workshop for Students",
+    content: "Hands-on AI sessions for beginners...",
+    date: "2025-09-08",
+    category: "Technology",
+    image:
+      "https://images.unsplash.com/photo-1612831455544-d8f2f3e41c8d?auto=format&fit=crop&w=1000&q=80",
     featured: false,
   },
 ];
@@ -39,105 +63,130 @@ const newsData: NewsArticle[] = [
 const categories = ["All", "Technology", "Events", "Programs"];
 
 const NewsPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [visibleCount, setVisibleCount] = useState<number>(6);
   const [, setLocation] = useLocation();
 
-  const filteredNews = newsData.filter((news) => {
-    const matchesSearch = news.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || news.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  // Filter news based on search and category
+  const filteredNews = newsData.filter(
+    (news) =>
+      (selectedCategory === "All" || news.category === selectedCategory) &&
+      news.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const featuredNews = filteredNews.filter((n) => n.featured);
-  const regularNews = filteredNews.filter((n) => !n.featured);
-
-  const loadMore = () => setVisibleCount(visibleCount + 4);
+  const loadMore = () => setVisibleCount(visibleCount + 6);
 
   return (
     <>
-      {/* Full width header */}
       <Header />
 
-      {/* Page content constrained to max width */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-center text-slate-900">
-          More News & Announcements
-        </h1>
+      {/* Hero Carousel / Featured */}
+      <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden rounded-b-3xl">
+        <motion.div
+          className="absolute inset-0 flex animate-slide"
+          initial={{ x: 0 }}
+          animate={{ x: -100 }}
+          transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+        >
+          {newsData.filter((n) => n.featured).map((news) => (
+            <div key={news.id} className="w-full flex-shrink-0 relative">
+              <img
+                src={news.image}
+                alt={news.title}
+                className="w-full h-[500px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
+                <h1 className="text-3xl md:text-5xl text-white font-bold drop-shadow-lg">
+                  {news.title}
+                </h1>
+                <p className="mt-2 text-gray-200">{news.content}</p>
+                <button
+                  onClick={() => setLocation(`/news/${news.id}`)}
+                  className="mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full shadow-lg"
+                >
+                  Read More
+                </button>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
 
-        {/* Search & Categories */}
-        <div className="flex flex-col md:flex-row justify-center items-center mb-8 gap-4">
-          <div className="relative w-full md:w-1/2">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-12 flex gap-8">
+        {/* Floating Sidebar */}
+        <aside className="w-64 sticky top-28 flex flex-col gap-6">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search news..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="border border-gray-300 rounded-full px-12 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border rounded-full pl-12 pr-4 py-2 focus:ring-2 focus:ring-red-600 shadow-md"
             />
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full transition ${
                   selectedCategory === cat
-                    ? "bg-primary text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    ? "bg-red-600 text-white"
+                    : "bg-gray-100 hover:bg-gray-200"
                 }`}
               >
                 {cat}
               </button>
             ))}
           </div>
-        </div>
+        </aside>
 
-        {/* Featured News */}
-        {featuredNews.length > 0 && (
-          <div className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredNews.map((news) => (
-              <div
-                key={news.id}
-                onClick={() => setLocation(`/news/${news.id}`)}
-                className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer h-64"
-              >
-                {news.image && (
+        {/* Masonry Grid Articles */}
+        <main className="flex-1">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+            <AnimatePresence>
+              {filteredNews.slice(0, visibleCount).map((news) => (
+                <motion.div
+                  key={news.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="break-inside-avoid rounded-xl overflow-hidden shadow-lg relative cursor-pointer hover:scale-105 transition-transform"
+                  onClick={() => setLocation(`/news/${news.id}`)}
+                >
                   <img
                     src={news.image}
                     alt={news.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-56 object-cover"
                   />
-                )}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                  <h2 className="text-white text-2xl font-bold">{news.title}</h2>
-                  <p className="text-gray-200 mt-2 line-clamp-2">{news.content}</p>
-                  <div className="mt-2 text-sm text-gray-300">{news.date}</div>
-                </div>
-              </div>
-            ))}
+                  <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <span className="bg-red-600 text-white text-xs px-2 py-1 rounded-full">
+                      {news.category}
+                    </span>
+                    <h3 className="mt-2 text-white font-semibold">{news.title}</h3>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
-        )}
 
-        {/* Regular News */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {regularNews.slice(0, visibleCount).map((news) => (
-            <NewsCard key={news.id} news={news} />
-          ))}
-        </div>
-
-        {/* Load More */}
-        {visibleCount < regularNews.length && (
-          <div className="text-center mt-12">
-            <Button onClick={loadMore} className="bg-primary text-white px-8 py-3 rounded-lg">
-              Load More
-            </Button>
-          </div>
-        )}
+          {visibleCount < filteredNews.length && (
+            <div className="text-center mt-12">
+              <button
+                onClick={loadMore}
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full shadow-md transition-transform hover:scale-105"
+              >
+                Load More
+              </button>
+            </div>
+          )}
+        </main>
       </div>
 
-      {/* Full width footer */}
       <Footer />
     </>
   );

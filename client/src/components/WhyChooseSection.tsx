@@ -36,10 +36,10 @@ export default function WhyChooseSection() {
             className="text-3xl lg:text-4xl font-bold text-[#8B1E1E] mb-4"
             data-testid="text-why-choose-title"
           >
-            Why Choose IETI
+            Why Choose AETI
           </h2>
           <p className="text-[#4B1B1B] max-w-2xl mx-auto">
-            Discover why our students trust IETI for professional growth and skill development.
+            Discover why our students trust AETI for professional growth and skill development.
           </p>
         </div>
 
