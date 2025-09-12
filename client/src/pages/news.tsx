@@ -1,190 +1,153 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "wouter";
+"use client";
+
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Search } from "lucide-react";
 
-// TypeScript type for news articles
-export interface NewsArticle {
+interface NewsItem {
   id: number;
   title: string;
-  content: string;
   date: string;
-  category: string;
   image: string;
-  featured: boolean;
+  link: string;
+  description: string;
 }
 
-// Actual news data
-const newsData: NewsArticle[] = [
+const newsData: NewsItem[] = [
   {
     id: 1,
-    title: "AETI Computer Graphic Designer",
-    content: "Building a Skilled Nation with AETI...",
-    date: "2025-09-10",
-    category: "Technology",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80",
-    featured: true,
+    title: "AETI TechFest 2025 – Awards Ceremony",
+    date: "Saturday, 06 September 2025",
+    image: "/images/news1.jpg",
+    link: "/news/1",
+    description:
+      "Celebrating innovation and excellence at the annual TechFest awards of AETI Colombo.",
   },
   {
     id: 2,
-    title: "Graduation Ceremony 2025",
-    content: "Celebrating the achievements of our graduates...",
-    date: "2025-08-20",
-    category: "Events",
-    image:
-      "https://images.unsplash.com/photo-1588075592446-265f3730b2d6?auto=format&fit=crop&w=1000&q=80",
-    featured: true,
+    title: "Industrial Training Highlights 2025",
+    date: "Thursday, 04 September 2025",
+    image: "/images/news2.jpg",
+    link: "/news/2",
+    description:
+      "Students gained practical exposure and showcased technical skills during industrial training.",
   },
   {
     id: 3,
-    title: "New Training Program Launch",
-    content: "Introducing advanced training programs...",
-    date: "2025-09-05",
-    category: "Programs",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80",
-    featured: false,
+    title: "Collaboration with University of Queensland",
+    date: "Thursday, 04 September 2025",
+    image: "/images/news3.jpg",
+    link: "/news/3",
+    description:
+      "AETI strengthens international partnerships with leading universities for advanced learning.",
   },
   {
     id: 4,
-    title: "AI Workshop for Students",
-    content: "Hands-on AI sessions for beginners...",
-    date: "2025-09-08",
-    category: "Technology",
-    image:
-      "https://images.unsplash.com/photo-1612831455544-d8f2f3e41c8d?auto=format&fit=crop&w=1000&q=80",
-    featured: false,
+    title: "Student Innovation Hackathon 2025",
+    date: "Monday, 01 September 2025",
+    image: "/images/news4.jpg",
+    link: "/news/4",
+    description:
+      "Creative ideas and engineering solutions from students at AETI’s annual hackathon.",
   },
 ];
 
-const categories = ["All", "Technology", "Events", "Programs"];
-
 const NewsPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [visibleCount, setVisibleCount] = useState<number>(6);
-  const [, setLocation] = useLocation();
-
-  // Filter news based on search and category
-  const filteredNews = newsData.filter(
-    (news) =>
-      (selectedCategory === "All" || news.category === selectedCategory) &&
-      news.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const loadMore = () => setVisibleCount(visibleCount + 6);
+  const featured = newsData[0];
+  const others = newsData.slice(1);
 
   return (
     <>
       <Header />
 
-      {/* Hero Carousel / Featured */}
-      <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden rounded-b-3xl">
-        <motion.div
-          className="absolute inset-0 flex animate-slide"
-          initial={{ x: 0 }}
-          animate={{ x: -100 }}
-          transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-        >
-          {newsData.filter((n) => n.featured).map((news) => (
-            <div key={news.id} className="w-full flex-shrink-0 relative">
-              <img
-                src={news.image}
-                alt={news.title}
-                className="w-full h-[500px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
-                <h1 className="text-3xl md:text-5xl text-white font-bold drop-shadow-lg">
-                  {news.title}
-                </h1>
-                <p className="mt-2 text-gray-200">{news.content}</p>
-                <button
-                  onClick={() => setLocation(`/news/${news.id}`)}
-                  className="mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full shadow-lg"
-                >
-                  Read More
-                </button>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+      {/* Hero Banner */}
+      <section className="relative bg-white text-black py-16 px-6 text-center">
+        <h1 className="text-3xl md:text-5xl font-bold">
+          Automobile Engineering Training Institute
+        </h1>
+        <p className="mt-3 text-xl text-gray-600">Orugodawatta</p>
+        <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-gray-500">
+          Stay updated with the latest happenings, achievements, and events at
+          AETI Colombo.
+        </p>
+      </section>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12 flex gap-8">
-        {/* Floating Sidebar */}
-        <aside className="w-64 sticky top-28 flex flex-col gap-6">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search news..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border rounded-full pl-12 pr-4 py-2 focus:ring-2 focus:ring-red-600 shadow-md"
+      <div className="max-w-7xl mx-auto p-6 space-y-12">
+        {/* Featured News */}
+        <section className="grid md:grid-cols-2 gap-8">
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src={featured.image}
+              alt={featured.title}
+              className="w-full h-72 object-cover"
             />
-          </div>
-          <div className="flex flex-col gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full transition ${
-                  selectedCategory === cat
-                    ? "bg-red-600 text-white"
-                    : "bg-gray-100 hover:bg-gray-200"
-                }`}
+            <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 text-white">
+              <h2 className="text-2xl font-bold mb-2">{featured.title}</h2>
+              <p className="text-sm mb-3">{featured.date}</p>
+              <a
+                href={featured.link}
+                className="inline-block bg-[#B22222] px-5 py-2 rounded-full hover:bg-[#8B0000] transition"
               >
-                {cat}
-              </button>
+                Read More
+              </a>
+            </div>
+          </div>
+
+          <div className="grid gap-6">
+            {others.map((item) => (
+              <div
+                key={item.id}
+                className="flex gap-4 items-center bg-white rounded-xl shadow hover:shadow-md transition overflow-hidden"
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-32 h-24 object-cover"
+                />
+                <div className="p-3">
+                  <h3 className="text-lg font-semibold hover:text-[#B22222]">
+                    <a href={item.link}>{item.title}</a>
+                  </h3>
+                  <p className="text-sm text-gray-500">{item.date}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </aside>
+        </section>
 
-        {/* Masonry Grid Articles */}
-        <main className="flex-1">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-            <AnimatePresence>
-              {filteredNews.slice(0, visibleCount).map((news) => (
-                <motion.div
-                  key={news.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="break-inside-avoid rounded-xl overflow-hidden shadow-lg relative cursor-pointer hover:scale-105 transition-transform"
-                  onClick={() => setLocation(`/news/${news.id}`)}
-                >
-                  <img
-                    src={news.image}
-                    alt={news.title}
-                    className="w-full h-56 object-cover"
-                  />
-                  <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <span className="bg-red-600 text-white text-xs px-2 py-1 rounded-full">
-                      {news.category}
-                    </span>
-                    <h3 className="mt-2 text-white font-semibold">{news.title}</h3>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-
-          {visibleCount < filteredNews.length && (
-            <div className="text-center mt-12">
-              <button
-                onClick={loadMore}
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full shadow-md transition-transform hover:scale-105"
+        {/* All News Grid */}
+        <section>
+          <h2 className="text-2xl font-bold mb-6 text-black">Latest News</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {newsData.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden"
               >
-                Load More
-              </button>
-            </div>
-          )}
-        </main>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2 hover:text-[#B22222]">
+                    <a href={item.link}>{item.title}</a>
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-2">{item.date}</p>
+                  <p className="text-sm text-gray-600 line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Load More Button */}
+          <div className="text-center mt-8">
+            <button className="bg-[#B22222] hover:bg-[#8B0000] text-white px-6 py-3 rounded-full shadow transition">
+              Load More
+            </button>
+          </div>
+        </section>
       </div>
 
       <Footer />
