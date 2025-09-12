@@ -14,7 +14,7 @@ export default function AboutSection() {
             <img
               src="src/components/assets/IETI_office_building.webp"
               alt="Modern IETI office building"
-              className="rounded-xl shadow-2xl border-4 border-red-600 w-full h-auto object-cover"
+              className="rounded-xl shadow-2xl   w-full h-auto object-cover"
               data-testid="img-about-building"
             />
           </div>
@@ -25,29 +25,25 @@ export default function AboutSection() {
               className="text-3xl lg:text-4xl font-extrabold text-red-800 tracking-tight"
               data-testid="text-about-title"
             >
-              About IETI
+              About AETI
             </h2>
             <p
               className="text-lg text-slate-700 leading-relaxed"
               data-testid="text-about-description"
             >
-              The Industrial Engineering Training Institute (IETI) is a
-              nationally recognized institute operating under the National
-              Apprentice and Industrial Training Authority (NAITA) in Sri Lanka.
+              The Automobile Engineering Training Institute (AETI) is a national-level training institute for automobile engineering, 
+              established in 1989 with Japanese government assistance (LKR 500 million). 
+              It functions under the National Apprentice & Industrial Training Authority (NAITA), Ministry of Education, Higher Education & Vocational Education.
+
+In 2017, AETI was relocated with the support of Japan International Co-operation Agency (JICA) at a cost of LKR 1500 million.
               <br />
               <br />
-              IETI plays a key role in advancing technical and vocational
-              education by providing high-quality training programs in industrial
-              engineering and related fields. With a strong focus on practical
-              skills and industry relevance, IETI equips trainees with the
-              knowledge and expertise needed to meet the growing demands of the
-              industrial sector, while also contributing to national workforce
-              development.
+             
             </p>
 
             <Link href="/about">
               <Button
-                className="bg-red-700 hover:bg-red-800 text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-colors"
+                className="bg-red-700 hover:bg-red-500 text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-colors"
                 data-testid="button-learn-more"
               >
                 Learn More
