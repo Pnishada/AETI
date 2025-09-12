@@ -20,9 +20,9 @@ export default function WhyChooseSection() {
     },
     {
       icon: MapPin,
-      title: "Nationwide Training Centers",
+      title: " Overseas Scholarships",
       description:
-        "Our training centers are spread across the country, making learning accessible to everyone.",
+        "Complete your AETI course and unlock international training, and exchange programs tailored to industry-ready skills.",
       testId: "benefit-centers",
     },
   ];
