@@ -19,7 +19,7 @@ export default function HeroSection() {
 
   const images: { src: string; alt: string }[] = [
     {
-      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      src: "src/components/assets/car-tools.jpg",
       alt: "Professional team collaborating in modern office",
     },
     {
@@ -27,15 +27,15 @@ export default function HeroSection() {
       alt: "Students learning programming",
     },
     {
-      src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      src:  "src/components/assets/Automotive_Eng_img.jpg",
       alt: "Hands-on technical training session",
     },
     {
-      src: uni1,
+      src:  "src/components/assets/news2.jpg",
       alt: "university students in a lecture hall",
     },
     {
-      src: uni2,
+      src: "src/components/assets/Automobile Mechanic.jpg",
       alt: "academic discussion",
     },
   ];
@@ -77,9 +77,6 @@ export default function HeroSection() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors">
-                Explore Programs
-              </Button>
               <Button
                 className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors"
                 onClick={() => setIsFormOpen(true)}
