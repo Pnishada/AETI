@@ -82,7 +82,7 @@ export default function Footer() {
       <div className="bg-[#4b0c0c]">
         <div className="max-w-7xl mx-auto px-6 py-6 text-center">
           <p className="text-slate-300 text-sm">
-            © 2025 AETI - Automobile Engineering Training Institute. All rights reserved.
+            © 2025 NAITA - National Apprentice and Industrial Training Authority.
           </p>
         </div>
       </div>
