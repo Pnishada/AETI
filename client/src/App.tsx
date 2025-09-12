@@ -9,6 +9,7 @@ import ProgramsSection from "./components/ProgramsSection";
 import ProgramDetails from "./pages/programs/[id]";
 import NewsPage from "./pages/news";
 
+
 function Router() {
   return (
     <Switch>

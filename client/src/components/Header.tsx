@@ -93,11 +93,11 @@ export default function Header() {
               Programs
             </button>
             <Link
-              href="/training-centers"
+              href="/departments"
               className="hover:text-yellow-200 transition-colors"
               data-testid="nav-training"
             >
-              Training Centers
+              Departments
             </Link>
             <Link
               href="/gallery"
