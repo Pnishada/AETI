@@ -23,7 +23,6 @@ export default function Header() {
   const handleSectionClick = (sectionId: string) => {
     setIsMobileMenuOpen(false);
 
-    // If we are already on homepage
     if (location === "/") {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -32,9 +31,7 @@ export default function Header() {
         window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
       }
     } else {
-      // Navigate to homepage first
       setLocation("/");
-      // Wait for the homepage to load
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -42,7 +39,7 @@ export default function Header() {
           const elementPosition = element.getBoundingClientRect().top;
           window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
         }
-      }, 500); // adjust timing if needed
+      }, 500);
     }
   };
 
@@ -54,6 +51,7 @@ export default function Header() {
     { name: "Gallery", route: "/gallery" },
     { name: "News", route: null },
     { name: "Contact", route: null },
+    
   ];
 
   return (
@@ -100,9 +98,13 @@ export default function Header() {
                 className="pl-10 pr-4 py-2 w-64 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 text-slate-800"
               />
             </form>
-            <Button className="bg-white hover:bg-yellow-100 text-red-900 px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow">
-              Download
-            </Button>
+
+            {/* Updated Download Button */}
+            <Link href="/download">
+              <Button className="bg-white hover:bg-yellow-100 text-red-900 px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow">
+                Download
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -131,9 +133,12 @@ export default function Header() {
                 </button>
               )
             )}
-            <Button className="w-full bg-white hover:bg-yellow-100 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold">
-              Download
-            </Button>
+            {/* Mobile Download Button */}
+            <Link href="/download">
+              <Button className="w-full bg-white hover:bg-yellow-100 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold">
+                Download
+              </Button>
+            </Link>
           </div>
         </div>
       )}
