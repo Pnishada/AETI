@@ -204,7 +204,7 @@ export default function Departments() {
               className="flex flex-col items-center"
             >
               <img
-                src="src/components/assets/IETI.png"
+                src="src/components/assets/IETI_Logo.png"
                 alt="IETI Industrial Engineering Training Institute Katubedda, Moratuwa"
                 className="h-16 w-auto mb-2"
               />
