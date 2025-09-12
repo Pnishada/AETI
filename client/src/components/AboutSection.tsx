@@ -12,7 +12,7 @@ export default function AboutSection() {
           {/* Left Content - Building Image */}
           <div className="order-2 lg:order-1">
             <img
-              src="src/components/assets/IETI_office_building.webp"
+              src="src/components/assets/AETI.jpg"
               alt="Modern IETI office building"
               className="rounded-xl shadow-2xl   w-full h-auto object-cover"
               data-testid="img-about-building"
