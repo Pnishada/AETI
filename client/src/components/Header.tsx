@@ -63,7 +63,7 @@ export default function Header() {
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md">
               <GraduationCap className="text-red-800 w-5 h-5" />
             </div>
-            <span className="text-xl font-extrabold tracking-wide">IETI</span>
+            <span className="text-xl font-extrabold tracking-wide">AETI</span>
           </Link>
 
           {/* Desktop Navigation */}

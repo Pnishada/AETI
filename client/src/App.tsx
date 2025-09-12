@@ -8,7 +8,6 @@ import AboutPage from "@/pages/AboutPage";
 import ProgramsSection from "./components/ProgramsSection";
 import ProgramDetails from "./pages/programs/[id]";
 import NewsPage from "./pages/news";
-import NewsDetails from "./pages/news/[id]";
 
 function Router() {
   return (
@@ -43,10 +42,6 @@ function Router() {
 
       <Route path="/news">
         <NewsPage />
-      </Route>
-
-      <Route path="/news/:id">
-        <NewsDetails />
       </Route>
 
       {/* Catch-all 404 route */}
