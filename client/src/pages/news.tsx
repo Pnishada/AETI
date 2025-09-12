@@ -18,7 +18,7 @@ const newsData: NewsItem[] = [
     id: 1,
     title: "AETI TechFest 2025 – Awards Ceremony",
     date: "Saturday, 06 September 2025",
-    image: "/images/news1.jpg",
+    image: "src/components/assets/news1.jpg",
     link: "/news/1",
     description:
       "Celebrating innovation and excellence at the annual TechFest awards of AETI Colombo.",
@@ -27,7 +27,7 @@ const newsData: NewsItem[] = [
     id: 2,
     title: "Industrial Training Highlights 2025",
     date: "Thursday, 04 September 2025",
-    image: "/images/news2.jpg",
+    image: "src/components/assets/news2.jpg",
     link: "/news/2",
     description:
       "Students gained practical exposure and showcased technical skills during industrial training.",
@@ -36,7 +36,7 @@ const newsData: NewsItem[] = [
     id: 3,
     title: "Collaboration with University of Queensland",
     date: "Thursday, 04 September 2025",
-    image: "/images/news3.jpg",
+    image: "src/components/assets/news3.jpg",
     link: "/news/3",
     description:
       "AETI strengthens international partnerships with leading universities for advanced learning.",
@@ -45,7 +45,7 @@ const newsData: NewsItem[] = [
     id: 4,
     title: "Student Innovation Hackathon 2025",
     date: "Monday, 01 September 2025",
-    image: "/images/news4.jpg",
+    image: "src/components/assets/news4.jpg",
     link: "/news/4",
     description:
       "Creative ideas and engineering solutions from students at AETI’s annual hackathon.",
