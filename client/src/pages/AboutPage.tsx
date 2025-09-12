@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header"; // Header component
 import Footer from "../components/Footer"; // Footer component
 import { motion } from "framer-motion";
@@ -11,6 +11,17 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 const AboutPage: React.FC = () => {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const courses = [
+    "Automobile Mechanic",
+    "Automobile Electrician",
+    "Automobile Machinist",
+    "Automobile A/C Mechanic",
+    "Automobile Tinker",
+    "Automobile Painter",
+  ];
+
   return (
     <div className="w-full min-h-screen bg-gray-50">
       {/* Header */}
@@ -24,10 +35,18 @@ const AboutPage: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-            About <span className="text-blue-700">AETI</span>
+            About <span className="text-red-700">AETI</span>
           </h1>
           <p className="mt-6 text-lg text-gray-600">
-            The Automobile Engineering Training Institute (AETI), also known as Japan Tech, is a national training institute in Sri Lanka established in 1989 with Japanese government grant aid to meet the growing demand for skilled personnel in the automobile industry. Operating under the National Apprentice and Industrial Training Authority (NAITA) and the Ministry of Youth Affairs, AETI provides specialized, full-time courses to develop professionals in areas like automobile mechanics, electrical work, and machining. The institute's goal is to provide hands-on training in sophisticated technologies, preparing graduates for employment both locally and internationally in the evolving automotive sector.
+            The Automobile Engineering Training Institute (AETI) a National
+            level Training Institute for automobile engineering was established
+            by a grant aid from the Government of Japan at a cost of LKR 500
+            million. The Institute was ceremonially declared open on 28th
+            October 1989 by his Excellency then President of Sri Lanka along
+            with his Excellency then Ambassador of Japan. AETI functions under
+            purview of National Apprentice and Industrial Training Authority
+            (NAITA) of the Ministry of Education, Higher Education and
+            Vocational Education.
           </p>
         </motion.div>
 
@@ -73,21 +92,39 @@ const AboutPage: React.FC = () => {
       {/* Who We Are Section */}
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Key aspects of AETI (Japan Tech):</h2>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Key aspects of AETI (Japan Tech):
+          </h2>
           <p className="mt-6 text-gray-600 leading-relaxed max-w-3xl mx-auto">
-Establishment:
-Founded in 1989, with significant financial and technical assistance from the Japanese government. 
-<p>Parent Organization:
-Functions under the purview of the National Apprentice and Industrial Training Authority (NAITA), which is under the Ministry of Youth Affairs. </p>
-<p>
-Purpose:
-To provide specialized training and address workforce needs in the automotive industry, preparing graduates for local and international markets.</p>
+            Training courses are conducted in 06 streams with approximately 600
+            students (morning & evening batches):
           </p>
-          <p className="mt-4 text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Over the years, NAITA has partnered with hundreds of industries,
-            providing apprenticeships and skill certifications to thousands of
-            students. With our nationwide presence, we bring opportunities closer
-            to every aspiring professional in Sri Lanka.
+
+          {/* Interactive Courses List */}
+          <ul className="text-left mt-6 space-y-2 max-w-md mx-auto">
+            {courses.map((course, index) => (
+              <li
+                key={index}
+                onClick={() => setSelected(course)}
+                className={`cursor-pointer transition ${
+                  selected === course
+                    ? "font-bold text-blue-700"
+                    : "hover:font-bold"
+                }`}
+              >
+                • {course}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-6 text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            All automotive courses are formulated in consultation with industry in order to ensure that the trainees meet the skilled manpower requirements of the Automobile Industry, which provide, on-the-job training (OJT) facility for trainees completing the Institutional Training component at the institute. The employment rate of those completing training from the Institute is almost 100%. AETI also provides skill upgrading training with career advancement opportunities for those are in employment. 
+          </p>
+          <p className="mt-2 text-gray-600 leading-relaxed max-w-3xl mx-auto">
+             The institute was relocated to its new premises due to New Kelani Bridge project  in 2017 and Japan International Co-operation Agency (JICA) has kindly offered assistance to re-locate AETI at a cost of over LKR 1500 million.
+
+
+
           </p>
         </div>
       </section>
@@ -97,24 +134,34 @@ To provide specialized training and address workforce needs in the automotive in
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 px-6">
           <Card>
             <CardContent>
-              <h2 className="text-2xl font-semibold text-gray-900">Our Mission</h2>
+              <h2 className="text-2xl font-semibold text-gray-900">
+                Our Mission
+              </h2>
               <p className="mt-4 text-gray-600">
-To provide systematic training and develop technology-related skills for students to perform at the highest professional level. 
-To produce employable graduates with strong technical knowledge, practical skills, and a global outlook for the sustainable future of the automotive industry. 
-To foster human potential for entrepreneurship and create responsible citizens with strong ethical and social values. 
-To maintain strong industry linkages and facilitate continued learning, research, and innovation within the automotive sector.
+                To provide systematic training and develop technology-related
+                skills for students to perform at the highest professional
+                level. To produce employable graduates with strong technical
+                knowledge, practical skills, and a global outlook for the
+                sustainable future of the automotive industry. To foster human
+                potential for entrepreneurship and create responsible citizens
+                with strong ethical and social values. To maintain strong
+                industry linkages and facilitate continued learning, research,
+                and innovation within the automotive sector.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardContent>
-              <h2 className="text-2xl font-semibold text-gray-900">Our Vision</h2>
+              <h2 className="text-2xl font-semibold text-gray-900">
+                Our Vision
+              </h2>
               <p className="mt-4 text-gray-600">
-                Vision (The ideal future state)
-To be the best Automotive Training Institute in the region. 
-To be a center of excellence imparting technical education and producing skilled automobile engineers. 
-To become a leading hub for innovation and sustainable solutions in the automotive sector.
+                To be the best Automotive Training Institute in the region. To
+                be a center of excellence imparting technical education and
+                producing skilled automobile engineers. To become a leading hub
+                for innovation and sustainable solutions in the automotive
+                sector.
               </p>
             </CardContent>
           </Card>
@@ -124,7 +171,7 @@ To become a leading hub for innovation and sustainable solutions in the automoti
       {/* Why Choose NAITA */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Why Choose NAITA</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Why Choose AETI</h2>
           <p className="mt-4 text-gray-600">
             We provide government-certified training, industry partnerships, and
             nationwide training opportunities.
@@ -143,7 +190,7 @@ To become a leading hub for innovation and sustainable solutions in the automoti
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 className="bg-gray-50 p-8 rounded-2xl shadow-md flex flex-col items-center"
               >
-                <item.icon className="w-12 h-12 text-green-600" />
+                <item.icon className="w-12 h-12 text-red-700" />
                 <h3 className="mt-4 text-lg font-semibold text-gray-800">
                   {item.title}
                 </h3>
