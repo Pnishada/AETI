@@ -23,52 +23,69 @@ import { Textarea } from "@/components/ui/textarea";
 export default function ProgramsSection() {
   const programs = [
     {
-      id: "automobile-mechanic",
+      id: "Automobile Mechanic",
       icon: Hammer,
       title: "Automobile Mechanic",
-      image: "https://source.unsplash.com/1000x600/?mechanic,car",
+      image: "src/components/assets/Automobile Mechanic.jpg",
       description:
         "Learn practical and theoretical aspects of modern automobile mechanics with hands-on training.",
+      fee: "200,000",
+      duration: "3 years",
+      method: "1 year Institutional; 2 years Industrial",
     },
     {
-      id: "automobile-electrician",
+      id: "Automobile Electrician",
       icon: Bolt,
       title: "Automobile Electrician",
-      image: "https://source.unsplash.com/1000x600/?car,electric",
+      image: "src/components/assets/Automobile Electrician.jpg",
       description:
         "Specialize in automobile electrical systems, diagnostics, and maintenance.",
+      fee: "200,000",
+      duration: "3 years",
+      method: "1 year Institutional; 2 years Industrial",
     },
     {
-      id: "automobile-machinist",
+      id: "Automobile Machinist",
       icon: Wrench,
-      title: "Automobile Machinist",
-      image: "https://source.unsplash.com/1000x600/?machine,garage",
+      title: "Machinist",
+      image: "src/components/assets/Automobile Machinist.jpg",
       description:
         "Develop machining and repair skills for automobile components and parts.",
+      fee: "170,000",
+      duration: "3 years",
+      method: "1 year Institutional; 2 years Industrial",
     },
     {
-      id: "automobile-ac-mechanic",
+      id: "Automobile Air Condition Mechanic",
       icon: Snowflake,
       title: "Automobile A/C Mechanic",
-      image: "https://source.unsplash.com/1000x600/?car,aircondition",
+      image: "src/components/assets/Automobile Air Condition Mechanic.jpg",
       description:
         "Master automobile A/C repair, installation, and troubleshooting techniques.",
+      fee: "70,000",
+      duration: "2 years",
+      method: "1 year Institutional; 1 year Industrial",
     },
     {
-      id: "automobile-painter",
+      id: "Automobile Painter",
       icon: Paintbrush,
       title: "Automobile Painter",
-      image: "https://source.unsplash.com/1000x600/?car,paint",
+      image: "src/components/assets/Automobile Painter.jpg",
       description:
         "Learn professional automobile painting and finishing skills.",
+      fee: "30,000",
+      duration: "1½ years",
+      method: "6 months Institutional; 1 year Industrial",
     },
     {
-      id: "automobile-technician",
+      id: "Automobile Tinker",
       icon: Car,
-      title: "Automobile Technician",
-      image: "https://source.unsplash.com/1000x600/?car,engine",
-      description:
-        "Comprehensive training covering diagnosis, service, and modern automotive technologies.",
+      title: "Automobile Tinker",
+      image: "src/components/assets/Automobile Tinker.jpg",
+      description: "Comprehensive training covering practical automobile work.",
+      fee: "40,000",
+      duration: "1½ years",
+      method: "6 months Institutional; 1 year Industrial",
     },
   ];
 
@@ -77,7 +94,6 @@ export default function ProgramsSection() {
   const [selectedProgram, setSelectedProgram] = useState<any>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  // === Form State ===
   const [formData, setFormData] = useState({
     program: "",
     name: "",
@@ -110,38 +126,17 @@ export default function ProgramsSection() {
     return () => observer.disconnect();
   }, []);
 
-  // === Handle Input Change ===
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // === Handle Form Submit ===
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     console.log("Form Submitted ✅", formData);
-
-    // Example: Send to backend API (uncomment & modify if needed)
-    /*
-    fetch("/api/enroll", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-    .then(res => res.json())
-    .then(data => console.log("Server Response:", data))
-    .catch(err => console.error("Error:", err));
-    */
-
-    // Reset & Close form
-    setFormData({
-      program: "",
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+    setFormData({ program: "", name: "", email: "", phone: "", message: "" });
     setIsFormOpen(false);
   };
 
@@ -167,7 +162,6 @@ export default function ProgramsSection() {
           {programs.map((program, index) => {
             const IconComponent = program.icon;
             const isVisible = visibleIndexes.includes(index);
-
             return (
               <div
                 key={index}
@@ -200,35 +194,53 @@ export default function ProgramsSection() {
         </div>
       </div>
 
-      {/* === Program Details Popup === */}
+      {/* Program Details Popup */}
       <Dialog
         open={!!selectedProgram}
         onOpenChange={() => setSelectedProgram(null)}
       >
-        <DialogContent className="sm:max-w-2xl p-0 overflow-hidden rounded-2xl shadow-xl">
+        <DialogContent className="sm:max-w-3xl p-0 overflow-hidden rounded-3xl shadow-xl">
           {selectedProgram && (
             <>
-              {/* Image Banner */}
-              <div className="relative h-56 sm:h-72 md:h-80 w-full">
+              <div className="relative h-64 sm:h-80 w-full">
                 <img
                   src={selectedProgram.image}
                   alt={selectedProgram.title}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover rounded-t-3xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                <div className="absolute bottom-4 left-6 right-6 text-white">
-                  <h2 className="text-2xl sm:text-3xl font-extrabold">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent rounded-t-3xl" />
+                <div className="absolute bottom-6 left-6 flex flex-col gap-2 text-white">
+                  <div className="w-12 h-12 bg-red-700 rounded-xl flex items-center justify-center shadow-lg">
+                    <selectedProgram.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold">
                     {selectedProgram.title}
                   </h2>
-                  <p className="text-sm sm:text-base text-gray-200 mt-1">
+                  <p className="text-sm sm:text-base text-gray-200 max-w-xs">
                     {selectedProgram.description}
                   </p>
                 </div>
               </div>
 
-              {/* Body */}
               <div className="p-6 space-y-6">
-                <DialogFooter>
+                <table className="w-full text-left border-collapse">
+                  <tbody>
+                    <tr className="border-b">
+                      <th className="py-2 px-4 font-medium">Fee (Rs.)</th>
+                      <td className="py-2 px-4">{selectedProgram.fee}</td>
+                    </tr>
+                    <tr className="border-b">
+                      <th className="py-2 px-4 font-medium">Duration</th>
+                      <td className="py-2 px-4">{selectedProgram.duration}</td>
+                    </tr>
+                    <tr className="border-b">
+                      <th className="py-2 px-4 font-medium">Training Method</th>
+                      <td className="py-2 px-4">{selectedProgram.method}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <DialogFooter className="pt-4">
                   <Button
                     onClick={() => {
                       setIsFormOpen(true);
@@ -245,7 +257,7 @@ export default function ProgramsSection() {
         </DialogContent>
       </Dialog>
 
-      {/* === Enroll Form Popup === */}
+      {/* Enroll Form Popup */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
