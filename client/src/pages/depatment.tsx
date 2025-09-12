@@ -175,56 +175,60 @@ export default function Departments() {
       </Dialog>
 
       {/* Partner Institutes Logos Section */}
-      <section className="bg-gray-100 py-10">
+      <section className="bg-gray-100 py-14">
         <div className="container mx-auto text-center">
-          <h2 className="text-xl font-semibold text-slate-800 mb-6">
+          <h2 className="text-2xl font-bold text-slate-900 mb-10">
             Partner Institutes
           </h2>
-          <div className="flex flex-wrap justify-center gap-10 items-center">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Institute of Engineering Technology */}
             <a
               href="https://iet.edu.lk"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center"
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center"
             >
               <img
                 src="src/components/assets/IET_Logo.png"
                 alt="Institute of Engineering Technology Katunayake"
-                className="h-16 w-auto mb-2"
+                className="h-20 w-auto mb-4"
               />
-              <span className="text-sm text-slate-700">
+              <span className="text-sm font-medium text-slate-800 text-center">
                 Institute of Engineering Technology Katunayake
               </span>
             </a>
 
+            {/* IETI Institute */}
             <a
               href="https://iet.edu.lk"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center"
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center"
             >
               <img
                 src="src/components/assets/IETI_Logo.png"
                 alt="IETI Industrial Engineering Training Institute Katubedda, Moratuwa"
-                className="h-16 w-auto mb-2"
+                className="h-20 w-auto mb-4"
               />
-              <span className="text-sm text-slate-700 text-center">
+              <span className="text-sm font-medium text-slate-800 text-center">
                 IETI Industrial Engineering Training Institute Katubedda, Moratuwa
               </span>
             </a>
 
+            {/* Nursing Training School */}
             <a
               href="https://iet.edu.lk"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center"
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center"
             >
               <img
                 src="src/components/assets/NTS_Logo.png"
                 alt="Nursing Training School"
-                className="h-16 w-auto mb-2"
+                className="h-20 w-auto mb-4"
               />
-              <span className="text-sm text-slate-700">
+              <span className="text-sm font-medium text-slate-800 text-center">
                 Nursing Training School
               </span>
             </a>
