@@ -24,13 +24,10 @@ const AboutPage: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-            About <span className="text-blue-700">IETI</span>
+            About <span className="text-blue-700">AETI</span>
           </h1>
           <p className="mt-6 text-lg text-gray-600">
-            The Industrial Engineering Training Institute (IETI) is committed to developing skilled 
-            professionals by offering specialized industrial training programs, practical learning 
-            opportunities, and career-focused education under the guidance of the National Apprentice 
-            & Industrial Training Authority (NAITA).
+            The Automobile Engineering Training Institute (AETI), also known as Japan Tech, is a national training institute in Sri Lanka established in 1989 with Japanese government grant aid to meet the growing demand for skilled personnel in the automobile industry. Operating under the National Apprentice and Industrial Training Authority (NAITA) and the Ministry of Youth Affairs, AETI provides specialized, full-time courses to develop professionals in areas like automobile mechanics, electrical work, and machining. The institute's goal is to provide hands-on training in sophisticated technologies, preparing graduates for employment both locally and internationally in the evolving automotive sector.
           </p>
         </motion.div>
 
@@ -76,19 +73,21 @@ const AboutPage: React.FC = () => {
       {/* Who We Are Section */}
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Who We Are</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Key aspects of AETI (Japan Tech):</h2>
           <p className="mt-6 text-gray-600 leading-relaxed max-w-3xl mx-auto">
-           The Industrial Engineering Training Institute (IETI) is a leading national 
-           institute under NAITA, dedicated to producing highly skilled professionals 
-           in the field of industrial engineering. Through industry-focused training 
-           and hands-on learning, IETI empowers individuals to build successful careers 
-           that meet both local and global workforce demands.
+Establishment:
+Founded in 1989, with significant financial and technical assistance from the Japanese government. 
+<p>Parent Organization:
+Functions under the purview of the National Apprentice and Industrial Training Authority (NAITA), which is under the Ministry of Youth Affairs. </p>
+<p>
+Purpose:
+To provide specialized training and address workforce needs in the automotive industry, preparing graduates for local and international markets.</p>
           </p>
           <p className="mt-4 text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Over the years, IETI has trained thousands of students in industrial engineering,
-            combining practical expertise with modern technology. As a trusted institute under 
-            NAITA, we continue to shape skilled professionals who are ready to meet the challenges 
-            of today’s industries and contribute to Sri Lanka’s growth.
+            Over the years, NAITA has partnered with hundreds of industries,
+            providing apprenticeships and skill certifications to thousands of
+            students. With our nationwide presence, we bring opportunities closer
+            to every aspiring professional in Sri Lanka.
           </p>
         </div>
       </section>
@@ -100,8 +99,10 @@ const AboutPage: React.FC = () => {
             <CardContent>
               <h2 className="text-2xl font-semibold text-gray-900">Our Mission</h2>
               <p className="mt-4 text-gray-600">
-                To equip individuals with practical industrial engineering skills and foster a 
-                competent workforce that drives innovation, productivity, and national development.
+To provide systematic training and develop technology-related skills for students to perform at the highest professional level. 
+To produce employable graduates with strong technical knowledge, practical skills, and a global outlook for the sustainable future of the automotive industry. 
+To foster human potential for entrepreneurship and create responsible citizens with strong ethical and social values. 
+To maintain strong industry linkages and facilitate continued learning, research, and innovation within the automotive sector.
               </p>
             </CardContent>
           </Card>
@@ -110,29 +111,30 @@ const AboutPage: React.FC = () => {
             <CardContent>
               <h2 className="text-2xl font-semibold text-gray-900">Our Vision</h2>
               <p className="mt-4 text-gray-600">
-                To be the premier institute in industrial engineering training, 
-                recognized for excellence in skill development and shaping professionals 
-                who excel in both local and global industries.
+                Vision (The ideal future state)
+To be the best Automotive Training Institute in the region. 
+To be a center of excellence imparting technical education and producing skilled automobile engineers. 
+To become a leading hub for innovation and sustainable solutions in the automotive sector.
               </p>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Why Choose IETI */}
+      {/* Why Choose NAITA */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Why Choose IETI</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Why Choose NAITA</h2>
           <p className="mt-4 text-gray-600">
-            We provide government-recognized industrial training, hands-on learning 
-            with modern technology, and strong industry partnerships to ensure career-ready professionals.
+            We provide government-certified training, industry partnerships, and
+            nationwide training opportunities.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             {[
               { icon: Building2, title: "Govt. Certified Training" },
               { icon: Award, title: "Industry Partnerships" },
-              { icon: Users, title: "Global Career Pathways" },
+              { icon: Users, title: "Nationwide Training Centers" },
             ].map((item, index) => (
               <motion.div
                 key={index}

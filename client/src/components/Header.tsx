@@ -16,8 +16,7 @@ export default function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-     setLocation(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-
+      setLocation(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
       setIsMobileMenuOpen(false);
     }
@@ -64,9 +63,7 @@ export default function Header() {
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md">
               <GraduationCap className="text-red-800 w-5 h-5" />
             </div>
-            <span className="text-xl font-extrabold tracking-wide">
-              AETI
-            </span>
+            <span className="text-xl font-extrabold tracking-wide">IETI</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -96,11 +93,11 @@ export default function Header() {
               Programs
             </button>
             <Link
-              href="/training-centers"
+              href="/departments"
               className="hover:text-yellow-200 transition-colors"
               data-testid="nav-training"
             >
-              Training Centers
+              Departments
             </Link>
             <Link
               href="/gallery"
@@ -141,7 +138,7 @@ export default function Header() {
               </div>
             </form>
             <Button
-              className="bg-yellow-500 hover:bg-yellow-600 text-red-900 px-6 py-2 rounded-lg font-semibold transition-colors"
+              className="bg-white hover:bg-yellow-100 text-red-900 px-6 py-2 rounded-lg font-semibold transition-colors"
               data-testid="button-apply-desktop"
             >
               Download
@@ -190,7 +187,10 @@ export default function Header() {
             <Link href="/gallery" className="block px-3 py-2 text-white" data-testid="mobile-nav-gallery">Gallery</Link>
             <button onClick={() => handleSectionClick("news")} className="block px-3 py-2 text-white text-left w-full" data-testid="mobile-nav-news">News</button>
             <button onClick={() => handleSectionClick("contact")} className="block px-3 py-2 text-white text-left w-full" data-testid="mobile-nav-contact">Contact</button>
-            <Button className="w-full text-left bg-yellow-500 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold" data-testid="button-apply-mobile">
+            <Button
+              className="w-full text-left bg-white hover:bg-yellow-100 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold transition-colors"
+              data-testid="button-apply-mobile"
+            >
               Download
             </Button>
           </div>
