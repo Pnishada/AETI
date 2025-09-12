@@ -74,9 +74,9 @@ export default function Footer() {
               <li className="flex items-start">
                 <Mail className="w-4 h-4 mr-2 mt-1" />
                 <span>
-                  Director/Principal:{" "}
-                  <a href="mailto:diraeti@naita.gov.lk" className="hover:text-white">diraeti@naita.gov.lk</a><br />
-                  Part-time Division:{" "}
+                  Director/Principal: {" "}
+                  <a href="mailto:diraeti@naita.gov.lk" className="hover:text-white">diraeti@naita.gov.lk</a><br/>
+                  Part-time:{" "}
                   <a href="mailto:aetiparttime@gmail.com" className="hover:text-white">aetiparttime@gmail.com</a>
                 </span>
               </li>
