@@ -52,8 +52,15 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="w-4 h-4 mr-2 mt-1" />
                 <span>
-                  Automobile Engineering Training Institute <br />
-                  69/A, Baseline Road, Orugodawatta
+                  <a
+                    href="https://maps.app.goo.gl/jK8RepHHaRVSaRJGA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white underline"
+                  >
+                    Automobile Engineering Training Institute <br />
+                    69/A, Baseline Road, Orugodawatta
+                  </a>
                 </span>
               </li>
               <li className="flex items-start">
