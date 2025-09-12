@@ -77,9 +77,6 @@ export default function HeroSection() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors">
-                Explore Programs
-              </Button>
               <Button
                 className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors"
                 onClick={() => setIsFormOpen(true)}
