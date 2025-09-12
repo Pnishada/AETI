@@ -64,7 +64,8 @@ export default function Header() {
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_6px_20px_rgba(255,215,0,0.4)] transition-shadow">
               <GraduationCap className="text-[#8b1e1e] w-6 h-6" />
             </div>
-            <span className="text-2xl font-extrabold tracking-wide">AETI</span>
+            <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">AETI</span>
+
           </Link>
 
           {/* Desktop Navigation */}
