@@ -25,7 +25,7 @@ export default function AboutSection() {
               className="text-3xl lg:text-4xl font-extrabold text-red-800 tracking-tight"
               data-testid="text-about-title"
             >
-              About AETI
+              Discover AETI
             </h2>
             <p
               className="text-lg text-slate-700 leading-relaxed"
