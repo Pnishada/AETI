@@ -52,7 +52,7 @@ export default function Header() {
   const navLinks = [
     { name: "Home", route: "/" },
     { name: "About", route: null },
-    { name: "Programs", route: "/programs" }, // ✅ fixed
+    { name: "Courses", route: "/programs" }, // ✅ fixed
     { name: "Departments", route: "/departments" },
     { name: "Gallery", route: "/gallery" },
     { name: "News", route: "/news" },
