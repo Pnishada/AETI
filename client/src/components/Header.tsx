@@ -28,7 +28,10 @@ export default function Header() {
       if (element) {
         const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
-        window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
+        window.scrollTo({
+          top: elementPosition + window.pageYOffset - headerOffset,
+          behavior: "smooth",
+        });
       }
     } else {
       setLocation("/");
@@ -37,7 +40,10 @@ export default function Header() {
         if (element) {
           const headerOffset = 80;
           const elementPosition = element.getBoundingClientRect().top;
-          window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
+          window.scrollTo({
+            top: elementPosition + window.pageYOffset - headerOffset,
+            behavior: "smooth",
+          });
         }
       }, 500);
     }
@@ -46,40 +52,53 @@ export default function Header() {
   const navLinks = [
     { name: "Home", route: "/" },
     { name: "About", route: null },
-    { name: "Programs", route: null },
+    { name: "Programs", route: "/programs" }, // ✅ fixed
     { name: "Departments", route: "/departments" },
     { name: "Gallery", route: "/gallery" },
-    { name: "News", route: null },
+    { name: "News", route: "/news" },
+    { name: "Staff", route: "/pages/staff" },
     { name: "Contact", route: null },
-    
   ];
 
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 hover:scale-105 transition-transform">
+          <Link
+            href="/"
+            className="flex items-center space-x-3 hover:scale-105 transition-transform"
+          >
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_6px_20px_rgba(255,215,0,0.4)] transition-shadow">
               <GraduationCap className="text-[#8b1e1e] w-6 h-6" />
             </div>
-            <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">AETI</span>
-
+            <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">
+              AETI
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 font-medium">
             {navLinks.map((link) =>
               link.route ? (
-                <Link key={link.name} href={link.route} className="hover:text-yellow-400 transition-colors">
+                <Link
+                  key={link.name}
+                  href={link.route}
+                  className={`hover:text-yellow-300 transition-colors ${
+                    location === link.route ? "text-yellow-300" : "text-white"
+                  }`}
+                >
                   {link.name}
                 </Link>
               ) : (
                 <button
                   key={link.name}
-                  onClick={() => handleSectionClick(link.name.toLowerCase())}
-                  className="hover:text-yellow-400 transition-colors"
+                  onClick={() =>
+                    handleSectionClick(
+                      link.name.toLowerCase().replace(/\s+/g, "-")
+                    )
+                  }
+                  className="hover:text-yellow-300 transition-colors"
                 >
                   {link.name}
                 </button>
@@ -87,60 +106,94 @@ export default function Header() {
             )}
           </nav>
 
-          {/* Search & Download */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 w-64 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 text-slate-800"
-              />
-            </form>
-
-            {/* Updated Download Button */}
-            <Link href="/download">
-              <Button className="bg-white hover:bg-yellow-100 text-red-900 px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow">
-                Download
-              </Button>
-            </Link>
-          </div>
+          {/* Search Bar */}
+          <form
+            onSubmit={handleSearch}
+            className="hidden md:flex items-center space-x-2"
+          >
+            <Input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-48 lg:w-64 rounded-lg bg-white text-black placeholder-gray-500"
+            />
+            <Button
+              type="submit"
+              size="icon"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg"
+            >
+              <Search className="w-5 h-5" />
+            </Button>
+          </form>
 
           {/* Mobile Menu Button */}
-          <button className="lg:hidden p-2" onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
-          </button>
+          <div className="lg:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleMobileMenu}
+              className="text-white"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#5a0f0f] border-t border-[#4b0c0c]">
-          <div className="px-4 pt-2 pb-3 space-y-2">
+        <div className="lg:hidden bg-gradient-to-b from-[#7b1e1e] to-[#5a0f0f] px-4 pt-2 pb-6 space-y-4">
+          <nav className="flex flex-col space-y-3 font-medium">
             {navLinks.map((link) =>
               link.route ? (
-                <Link key={link.name} href={link.route} className="block w-full text-left px-3 py-2 text-white hover:text-yellow-400 transition-colors">
+                <Link
+                  key={link.name}
+                  href={link.route}
+                  className="text-white hover:text-yellow-300 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   {link.name}
                 </Link>
               ) : (
                 <button
                   key={link.name}
-                  onClick={() => handleSectionClick(link.name.toLowerCase())}
-                  className="block w-full text-left px-3 py-2 text-white hover:text-yellow-400 transition-colors"
+                  onClick={() =>
+                    handleSectionClick(
+                      link.name.toLowerCase().replace(/\s+/g, "-")
+                    )
+                  }
+                  className="text-white hover:text-yellow-300 transition-colors text-left"
                 >
                   {link.name}
                 </button>
               )
             )}
-            {/* Mobile Download Button */}
-            <Link href="/download">
-              <Button className="w-full bg-white hover:bg-yellow-100 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold">
-                Download
-              </Button>
-            </Link>
-          </div>
+          </nav>
+
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center space-x-2 pt-4"
+          >
+            <Input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-lg bg-white text-black placeholder-gray-500"
+            />
+            <Button
+              type="submit"
+              size="icon"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg"
+            >
+              <Search className="w-5 h-5" />
+            </Button>
+          </form>
         </div>
       )}
     </header>

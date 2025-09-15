@@ -1,14 +1,15 @@
 import { Switch, Route } from "wouter";
 import Home from "@/pages/home";
-import Departments from "./pages/depatment";
 import Gallery from "@/pages/gallery";
 import Search from "@/pages/search";
 import NotFound from "@/pages/not-found";
 import AboutPage from "@/pages/AboutPage";
-import ProgramsSection from "./components/ProgramsSection";
+import CoursesSection from "./components/CoursesSection";
 import ProgramDetails from "./pages/programs/[id]";
 import NewsPage from "./pages/news";
-import DownloadPage from "@/pages/download"; // <-- added
+import DownloadPage from "@/pages/download";
+import Staff from "./pages/staff";
+import Departments from "./pages/depatment";
 
 function Router() {
   return (
@@ -34,23 +35,25 @@ function Router() {
       </Route>
 
       <Route path="/programs">
-        <ProgramsSection />
+        <CoursesSection />
       </Route>
 
       <Route path="/programs/:id">
-        <ProgramDetails />
+        <ProgramDetails /> {/* ✅ fixed */}
       </Route>
 
       <Route path="/news">
         <NewsPage />
       </Route>
 
-      {/* Download Page */}
       <Route path="/download">
         <DownloadPage />
       </Route>
 
-      {/* Catch-all 404 route */}
+      <Route path="/pages/staff">
+        <Staff />
+      </Route>
+
       <Route>
         <NotFound />
       </Route>
