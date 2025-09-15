@@ -19,88 +19,99 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import Footer from "./Footer";
+import Header from "./Header";
 
-export default function ProgramsSection() {
-  const programs = [
+export default function CoursesSection() {
+  // === Course Data ===
+  const courses = [
     {
       id: "Automobile Mechanic",
       icon: Hammer,
       title: "Automobile Mechanic",
-      image: "src/components/assets/Automobile Mechanic.jpg",
+      image: "/assets/Automobile Mechanic.jpg",
       description:
         "Learn practical and theoretical aspects of modern automobile mechanics with hands-on training.",
       fee: "200,000",
       duration: "3 years",
       method: "1 year Institutional; 2 years Industrial",
+      type: "Full-Time",
     },
     {
       id: "Automobile Electrician",
       icon: Bolt,
       title: "Automobile Electrician",
-      image: "src/components/assets/Automobile Electrician.jpg",
+      image: "/assets/Automobile Electrician.jpg",
       description:
         "Specialize in automobile electrical systems, diagnostics, and maintenance.",
       fee: "200,000",
       duration: "3 years",
       method: "1 year Institutional; 2 years Industrial",
+      type: "Full-Time",
     },
     {
       id: "Automobile Machinist",
       icon: Wrench,
       title: "Machinist",
-      image: "src/components/assets/Automobile Machinist.jpg",
+      image: "/assets/Automobile Machinist.jpg",
       description:
         "Develop machining and repair skills for automobile components and parts.",
       fee: "170,000",
       duration: "3 years",
       method: "1 year Institutional; 2 years Industrial",
+      type: "Full-Time",
     },
     {
       id: "Automobile Air Condition Mechanic",
       icon: Snowflake,
       title: "Automobile A/C Mechanic",
-      image: "src/components/assets/Automobile Air Condition Mechanic.jpg",
+      image: "/assets/Automobile Air Condition Mechanic.jpg",
       description:
         "Master automobile A/C repair, installation, and troubleshooting techniques.",
       fee: "70,000",
       duration: "2 years",
       method: "1 year Institutional; 1 year Industrial",
+      type: "Part-Time",
     },
     {
       id: "Automobile Painter",
       icon: Paintbrush,
       title: "Automobile Painter",
-      image: "src/components/assets/Automobile Painter.jpg",
-      description:
-        "Learn professional automobile painting and finishing skills.",
+      image: "/assets/Automobile Painter.jpg",
+      description: "Learn professional automobile painting and finishing skills.",
       fee: "30,000",
       duration: "1½ years",
       method: "6 months Institutional; 1 year Industrial",
+      type: "Part-Time",
     },
     {
       id: "Automobile Tinker",
       icon: Car,
       title: "Automobile Tinker",
-      image: "src/components/assets/Automobile Tinker.jpg",
+      image: "/assets/Automobile Tinker.jpg",
       description: "Comprehensive training covering practical automobile work.",
       fee: "40,000",
       duration: "1½ years",
       method: "6 months Institutional; 1 year Industrial",
+      type: "Part-Time",
     },
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleIndexes, setVisibleIndexes] = useState<number[]>([]);
-  const [selectedProgram, setSelectedProgram] = useState<any>(null);
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
-
   const [formData, setFormData] = useState({
-    program: "",
+    course: "",
     name: "",
     email: "",
     phone: "",
     message: "",
   });
+
+  const [activeTab, setActiveTab] = useState<"Full-Time" | "Part-Time">(
+    "Full-Time"
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,10 +130,7 @@ export default function ProgramsSection() {
     );
 
     const children = containerRef.current?.children;
-    if (children) {
-      Array.from(children).forEach((child) => observer.observe(child));
-    }
-
+    if (children) Array.from(children).forEach((child) => observer.observe(child));
     return () => observer.disconnect();
   }, []);
 
@@ -136,22 +144,48 @@ export default function ProgramsSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Submitted ✅", formData);
-    setFormData({ program: "", name: "", email: "", phone: "", message: "" });
+    setFormData({ course: "", name: "", email: "", phone: "", message: "" });
     setIsFormOpen(false);
   };
 
   return (
-    <section className="bg-white py-16 lg:py-24" id="programs">
+    <>
+    <Header/>
+    <section className="bg-white py-16 lg:py-24" id="courses">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-extrabold text-red-900 mb-4">
-            Programs & Training Categories
+            Courses & Training Categories
           </h2>
           <p className="text-gray-700 max-w-2xl mx-auto">
-            Explore our professional and hands-on programs, designed to develop
-            the next generation of skilled automobile technicians and engineers.
+            Choose from Full-Time or Part-Time courses tailored to your career
+            goals.
           </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex justify-center mb-10">
+          <button
+            onClick={() => setActiveTab("Full-Time")}
+            className={`px-6 py-2 rounded-l-lg font-semibold transition ${
+              activeTab === "Full-Time"
+                ? "bg-red-700 text-white shadow-md"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            Full-Time
+          </button>
+          <button
+            onClick={() => setActiveTab("Part-Time")}
+            className={`px-6 py-2 rounded-r-lg font-semibold transition ${
+              activeTab === "Part-Time"
+                ? "bg-red-700 text-white shadow-md"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            Part-Time
+          </button>
         </div>
 
         {/* Grid */}
@@ -159,65 +193,65 @@ export default function ProgramsSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
           ref={containerRef}
         >
-          {programs.map((program, index) => {
-            const IconComponent = program.icon;
-            const isVisible = visibleIndexes.includes(index);
-            return (
-              <div
-                key={index}
-                data-index={index}
-                className={`bg-white rounded-3xl p-8 text-center shadow-md border border-gray-200 transition-all transform duration-500 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-12"
-                } hover:-translate-y-3 hover:shadow-2xl`}
-              >
-                <div className="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6 hover:scale-110 transition-transform duration-300 animate-bounce-slow">
-                  <IconComponent className="text-red-800 w-10 h-10" />
-                </div>
-                <h3 className="font-bold text-red-800 mb-4 text-lg hover:text-red-900 transition-colors">
-                  {program.title}
-                </h3>
-                <Button
-                  variant="link"
-                  className="text-red-800 hover:text-red-900 font-medium transition-colors p-0"
-                  onClick={() => {
-                    setSelectedProgram(program);
-                    setFormData((prev) => ({ ...prev, program: program.title }));
-                  }}
+          {courses
+            .filter((c) => c.type === activeTab)
+            .map((course, index) => {
+              const IconComponent = course.icon;
+              const isVisible = visibleIndexes.includes(index);
+              return (
+                <div
+                  key={index}
+                  data-index={index}
+                  className={`bg-white rounded-3xl p-8 text-center shadow-md border border-gray-200 transition-all transform duration-500 ${
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-12"
+                  } hover:-translate-y-3 hover:shadow-2xl`}
                 >
-                  View Details
-                </Button>
-              </div>
-            );
-          })}
+                  <div className="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6 hover:scale-110 transition-transform duration-300 animate-bounce-slow">
+                    <IconComponent className="text-red-800 w-10 h-10" />
+                  </div>
+                  <h3 className="font-bold text-red-800 mb-4 text-lg hover:text-red-900 transition-colors">
+                    {course.title}
+                  </h3>
+                  <Button
+                    variant="link"
+                    className="text-red-800 hover:text-red-900 font-medium transition-colors p-0"
+                    onClick={() => {
+                      setSelectedCourse(course);
+                      setFormData((prev) => ({ ...prev, course: course.title }));
+                    }}
+                  >
+                    View Details
+                  </Button>
+                </div>
+              );
+            })}
         </div>
       </div>
 
-      {/* Program Details Popup */}
-      <Dialog
-        open={!!selectedProgram}
-        onOpenChange={() => setSelectedProgram(null)}
-      >
+      {/* Course Details Popup */}
+      <Dialog open={!!selectedCourse} onOpenChange={() => setSelectedCourse(null)}>
         <DialogContent className="sm:max-w-3xl p-0 overflow-hidden rounded-3xl shadow-xl">
-          {selectedProgram && (
+          {selectedCourse && (
             <>
               <div className="relative h-64 sm:h-80 w-full">
                 <img
-                  src={selectedProgram.image}
-                  alt={selectedProgram.title}
+                  src={selectedCourse.image}
+                  alt={selectedCourse.title}
                   className="absolute inset-0 w-full h-full object-cover rounded-t-3xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent rounded-t-3xl" />
                 <div className="absolute bottom-6 left-6 flex flex-col gap-2 text-white">
                   <div className="w-12 h-12 bg-red-700 rounded-xl flex items-center justify-center shadow-lg">
-                    <selectedProgram.icon className="w-6 h-6 text-white" />
+                    {/* ✅ Fixed icon rendering */}
+                    <selectedCourse.icon className="w-6 h-6 text-white" />
                   </div>
                   <h2 className="text-xl sm:text-2xl font-bold">
-                    {selectedProgram.title}
+                    {selectedCourse.title}
                   </h2>
                   <p className="text-sm sm:text-base text-gray-200 max-w-xs">
-                    {selectedProgram.description}
+                    {selectedCourse.description}
                   </p>
                 </div>
               </div>
@@ -227,15 +261,15 @@ export default function ProgramsSection() {
                   <tbody>
                     <tr className="border-b">
                       <th className="py-2 px-4 font-medium">Fee (Rs.)</th>
-                      <td className="py-2 px-4">{selectedProgram.fee}</td>
+                      <td className="py-2 px-4">{selectedCourse.fee}</td>
                     </tr>
                     <tr className="border-b">
                       <th className="py-2 px-4 font-medium">Duration</th>
-                      <td className="py-2 px-4">{selectedProgram.duration}</td>
+                      <td className="py-2 px-4">{selectedCourse.duration}</td>
                     </tr>
                     <tr className="border-b">
                       <th className="py-2 px-4 font-medium">Training Method</th>
-                      <td className="py-2 px-4">{selectedProgram.method}</td>
+                      <td className="py-2 px-4">{selectedCourse.method}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -244,7 +278,7 @@ export default function ProgramsSection() {
                   <Button
                     onClick={() => {
                       setIsFormOpen(true);
-                      setSelectedProgram(null);
+                      setSelectedCourse(null);
                     }}
                     className="bg-red-700 hover:bg-red-800 text-white rounded-lg px-6 py-2 shadow-md hover:shadow-lg transition"
                   >
@@ -268,10 +302,10 @@ export default function ProgramsSection() {
           </DialogHeader>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <Label htmlFor="program">Program</Label>
+              <Label htmlFor="course">Course</Label>
               <Input
-                id="program"
-                value={formData.program}
+                id="course"
+                value={formData.course}
                 readOnly
                 className="bg-gray-100 font-semibold"
               />
@@ -338,5 +372,7 @@ export default function ProgramsSection() {
         }
       `}</style>
     </section>
+    <Footer/>
+    </>
   );
 }
