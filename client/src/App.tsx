@@ -9,6 +9,8 @@ import ProgramsSection from "./components/ProgramsSection";
 import ProgramDetails from "./pages/programs/[id]";
 import NewsPage from "./pages/news";
 import DownloadPage from "@/pages/download"; // <-- added
+import ContactPage from "./pages/ContactPage";
+
 
 function Router() {
   return (
@@ -43,6 +45,10 @@ function Router() {
 
       <Route path="/news">
         <NewsPage />
+      </Route>
+
+      <Route path="/contact">
+        <ContactPage />
       </Route>
 
       {/* Download Page */}

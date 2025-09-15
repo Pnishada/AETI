@@ -35,7 +35,7 @@ const AboutPage: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-            About <span className="text-red-700">AETI</span>
+            Discover <span className="text-red-700">AETI</span>
           </h1>
           <p className="mt-6 text-lg text-gray-600">
             The Automobile Engineering Training Institute (AETI) a National

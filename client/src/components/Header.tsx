@@ -22,50 +22,34 @@ export default function Header() {
 
   const handleSectionClick = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-
-    if (location === "/") {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
-      }
-    } else {
-      setLocation("/");
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const headerOffset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
-        }
-      }, 500);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      window.scrollTo({ top: elementPosition + window.pageYOffset - headerOffset, behavior: "smooth" });
     }
   };
 
   const navLinks = [
     { name: "Home", route: "/" },
-    { name: "About", route: null },
-    { name: "Programs", route: null },
+    { name: "About", route: null }, // homepage section
+    { name: "Programs", route: null }, // homepage section
     { name: "Departments", route: "/departments" },
     { name: "Gallery", route: "/gallery" },
-    { name: "News", route: null },
-    { name: "Contact", route: null },
-    
+    { name: "News", route: "/news" },
+    { name: "Contact", route: "/contact" }, // separate page
   ];
 
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 hover:scale-105 transition-transform">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_6px_20px_rgba(255,215,0,0.4)] transition-shadow">
               <GraduationCap className="text-[#8b1e1e] w-6 h-6" />
             </div>
             <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">AETI</span>
-
           </Link>
 
           {/* Desktop Navigation */}
@@ -100,7 +84,6 @@ export default function Header() {
               />
             </form>
 
-            {/* Updated Download Button */}
             <Link href="/download">
               <Button className="bg-white hover:bg-yellow-100 text-red-900 px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow">
                 Download
@@ -121,7 +104,12 @@ export default function Header() {
           <div className="px-4 pt-2 pb-3 space-y-2">
             {navLinks.map((link) =>
               link.route ? (
-                <Link key={link.name} href={link.route} className="block w-full text-left px-3 py-2 text-white hover:text-yellow-400 transition-colors">
+                <Link
+                  key={link.name}
+                  href={link.route}
+                  className="block w-full text-left px-3 py-2 text-white hover:text-yellow-400 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   {link.name}
                 </Link>
               ) : (
@@ -134,9 +122,8 @@ export default function Header() {
                 </button>
               )
             )}
-            {/* Mobile Download Button */}
             <Link href="/download">
-              <Button className="w-full bg-white hover:bg-yellow-100 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold">
+              <Button className="w-full bg-white hover:bg-yellow-100 text-red-900 px-3 py-2 rounded-lg mt-2 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>
                 Download
               </Button>
             </Link>
