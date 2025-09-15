@@ -10,7 +10,8 @@ import NewsPage from "./pages/news";
 import DownloadPage from "@/pages/download";
 import Staff from "./pages/staff";
 import Departments from "./pages/depatment";
-
+import ContactPage from  "./pages/ContactPage";
+import { Contact } from "lucide-react";
 function Router() {
   return (
     <Switch>
@@ -20,6 +21,10 @@ function Router() {
 
       <Route path="/departments">
         <Departments />
+      </Route>
+
+      <Route path="/pages/ContactPage">
+        <ContactPage />
       </Route>
 
       <Route path="/about">

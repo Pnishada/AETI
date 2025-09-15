@@ -50,15 +50,13 @@ export default function Header() {
   };
 
   const navLinks = [
-    { name: "Home", route: "/" },
-    { name: "About", route: null },
-    { name: "Courses", route: "/programs" }, // ✅ fixed
-    { name: "Departments", route: "/departments" },
-    { name: "Gallery", route: "/gallery" },
-    { name: "News", route: "/news" },
-    { name: "Staff", route: "/pages/staff" },
-    { name: "Contact", route: null },
-  ];
+  { name: "Home", route: "/" },
+  { name: "Discover AETI", route: "/about" },
+  { name: "Courses", route: "/programs" },
+  { name: "Downloads", route: "/download" },
+  { name: "Gallery", route: "/gallery" },
+  { name: "LMS", route: "/lms" }, // LMS page eka create karanna oni
+];
 
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
