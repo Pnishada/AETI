@@ -4,10 +4,31 @@ import Footer from "@/components/Footer";
 import { Download } from "lucide-react";
 
 const downloads = [
-  { title: "Admission Form", file: "/files/form1.pdf", description: "Fill this form to apply for admission." },
-  { title: "Course Brochure", file: "/files/brochure.pdf", description: "Detailed information about programs." },
-  { title: "Guidelines", file: "/files/guidelines.pdf", description: "Official guidelines for students." },
-  { title: "Part-time Application", file: "/files/parttime.pdf", description: "Application for part-time courses." },
+  { 
+    title: "Full-time Course Application", 
+    file: "/files/fulltime-application.pdf", 
+    description: "Application form for full-time courses." 
+  },
+  { 
+    title: "Request for Confirmation of Certificates", 
+    file: "/files/certificate-confirmation.pdf", 
+    description: "Request official confirmation of your certificates." 
+  },
+  { 
+    title: "Registration as an In-Plant Training Provider", 
+    file: "/files/in-plant-registration.pdf", 
+    description: "Register as a certified in-plant training provider." 
+  },
+  { 
+    title: "Request Trainees for OJT/Industry", 
+    file: "/files/request-trainees.pdf", 
+    description: "Request trainees for on-the-job training or industrial placements." 
+  },
+  { 
+    title: "Attendance Form for In-Plant Trainees", 
+    file: "/files/attendance-form.pdf", 
+    description: "Record attendance for in-plant trainees." 
+  },
 ];
 
 export default function DownloadPage() {
