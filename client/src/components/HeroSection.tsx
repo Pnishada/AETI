@@ -2,45 +2,26 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay } from "swiper/modules";
-import studentl from "@/components/assets/studentl.jpg"; // Local image import
-import uni1 from "@/components/assets/uni1.jpg";
-import uni2 from "@/components/assets/uni2.jpg";
+import { Autoplay, Pagination } from "swiper/modules";
 
-export default function HeroSection() {
+export default function HeroSlider() {
+  // === Register Form state ===
   const [isFormOpen, setIsFormOpen] = useState(false);
-
-  const images: { src: string; alt: string }[] = [
-    {
-      src: "src/components/assets/car-tools.jpg",
-      alt: "Professional team collaborating in modern office",
-    },
-    {
-      src: studentl,
-      alt: "Students learning programming",
-    },
-    {
-      src:  "src/components/assets/Automotive_Eng_img.jpg",
-      alt: "Hands-on technical training session",
-    },
-    {
-      src:  "src/components/assets/news2.jpg",
-      alt: "university students in a lecture hall",
-    },
-    {
-      src: "src/components/assets/Automobile Mechanic.jpg",
-      alt: "academic discussion",
-    },
-  ];
-
-  // Form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,7 +29,9 @@ export default function HeroSection() {
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
@@ -60,58 +43,54 @@ export default function HeroSection() {
     setIsFormOpen(false);
   };
 
+  // === Background slides ===
+  const slides = [
+    "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80",
+  ];
+
   return (
-    <section className="bg-gray-50 py-16 lg:py-24" id="home">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-                Founded for skill. Built for industry.
-              </h1>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                Automobile Engineering Training Institute (AETI)
-              </p>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white px-8 py-3 rounded-lg font-medium transition-colors"
-                onClick={() => setIsFormOpen(true)}
-              >
-                Apply Online
-              </Button>
-            </div>
-          </div>
-
-          {/* Right Content - Slider */}
-          <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[16/9] sm:aspect-[4/3]">
-            <Swiper
-              modules={[Pagination, Autoplay]}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 3000 }}
-              loop={true}
-              className="w-full h-full"
+    <section className="relative min-h-screen flex items-center justify-center text-white">
+      {/* === Background Slider === */}
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        loop={true}
+        pagination={{ clickable: true }}
+        className="absolute inset-0 w-full h-full"
+      >
+        {slides.map((img, i) => (
+          <SwiperSlide key={i}>
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${img})` }}
             >
-              {images.map((img, i) => (
-                <SwiperSlide key={i}>
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full h-full object-cover rounded-2xl"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
+              {/* Dark overlay */}
+              <div className="w-full h-full bg-black/60"></div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* === Overlay Text + Button === */}
+      <div className="relative z-10 text-center px-4">
+        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight drop-shadow-lg">
+          Founded for Skill. <br /> Built for Industry.
+        </h1>
+        <p className="mt-4 text-2xl md:text-3xl font-medium text-gray-200 drop-shadow-md">
+          Automobile Engineering Training Institute (AETI)
+        </p>
+        <Button
+          onClick={() => setIsFormOpen(true)}
+          className="mt-8 px-10 py-5 text-lg rounded-2xl bg-red-600 hover:bg-red-500 transition duration-300 shadow-xl"
+        >
+          Apply Online
+        </Button>
       </div>
 
       {/* === Register Form Popup === */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="sm:max-w-lg rounded-2xl bg-white p-6">
+        <DialogContent className="sm:max-w-lg rounded-2xl bg-white p-6 text-black">
           <DialogHeader>
             <DialogTitle>Apply Online</DialogTitle>
             <DialogDescription>
@@ -160,7 +139,10 @@ export default function HeroSection() {
               />
             </div>
             <DialogFooter>
-              <Button type="submit" className="bg-[#8B1E1E] hover:bg-[#6F1616] text-white w-full">
+              <Button
+                type="submit"
+                className="bg-red-600 hover:bg-red-500 text-white w-full"
+              >
                 Submit Application
               </Button>
             </DialogFooter>
