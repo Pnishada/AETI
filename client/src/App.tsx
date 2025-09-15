@@ -4,61 +4,73 @@ import Gallery from "@/pages/gallery";
 import Search from "@/pages/search";
 import NotFound from "@/pages/not-found";
 import AboutPage from "@/pages/AboutPage";
-import CoursesSection from "./components/CoursesSection";
-import ProgramDetails from "./pages/programs/[id]";
-import NewsPage from "./pages/news";
+import CoursesSection from "@/components/CoursesSection"; // ✅ CoursesSection component
+import ProgramDetails from "@/pages/programs/[id]";
+import NewsPage from "@/pages/news";
 import DownloadPage from "@/pages/download";
-import Staff from "./pages/staff";
-import Departments from "./pages/depatment";
-import ContactPage from  "./pages/ContactPage";
-import { Contact } from "lucide-react";
+import Staff from "@/pages/staff";
+import Departments from "@/pages/depatment";
+import ContactPage from "@/pages/ContactPage";
+
 function Router() {
   return (
     <Switch>
+      {/* Home */}
       <Route path="/">
         <Home />
       </Route>
 
+      {/* Departments */}
       <Route path="/departments">
         <Departments />
       </Route>
 
-      <Route path="/pages/ContactPage">
+      {/* Contact */}
+      <Route path="/contact">
         <ContactPage />
       </Route>
 
+      {/* About */}
       <Route path="/about">
         <AboutPage />
       </Route>
 
+      {/* Gallery */}
       <Route path="/gallery">
         <Gallery />
       </Route>
 
+      {/* Search */}
       <Route path="/search">
         <Search />
       </Route>
 
-      <Route path="/programs">
-        <CoursesSection />
+      {/* Courses & Programs */}
+      <Route path="/CoursesSection">
+        <CoursesSection /> {/* ✅ popup-based courses list */}
       </Route>
 
-      <Route path="/programs/:id">
-        <ProgramDetails /> {/* ✅ fixed */}
+      {/* If later need individual program details */}
+      <Route path="/CoursesSection/:id">
+        <ProgramDetails />
       </Route>
 
+      {/* News */}
       <Route path="/news">
         <NewsPage />
       </Route>
 
+      {/* Downloads */}
       <Route path="/download">
         <DownloadPage />
       </Route>
 
-      <Route path="/pages/staff">
+      {/* Staff */}
+      <Route path="/staff">
         <Staff />
       </Route>
 
+      {/* Not Found */}
       <Route>
         <NotFound />
       </Route>

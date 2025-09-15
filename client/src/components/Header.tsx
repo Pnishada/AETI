@@ -52,7 +52,7 @@ export default function Header() {
   const navLinks = [
   { name: "Home", route: "/" },
   { name: "Discover AETI", route: "/about" },
-  { name: "Courses", route: "/programs" },
+  { name: "Courses", route: "/CoursesSection" },
   { name: "Downloads", route: "/download" },
   { name: "Gallery", route: "/gallery" },
   { name: "LMS", route: "/lms" }, // LMS page eka create karanna oni
