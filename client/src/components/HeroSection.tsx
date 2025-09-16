@@ -18,6 +18,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
+import Automobile_Electrician from "@/components/assets/Automobile Electrician.jpg"
+import Automobile_Machinist from "@/components/assets/Automobile Machinist.jpg"
+import Automobile_Mechanic from "@/components/assets/Automobile Mechanic.jpg"
+import Automobile_Painter from "@/components/assets/Automobile Painter.jpg"
 
 export default function HeroSlider() {
   // === Register Form state ===
@@ -25,28 +29,49 @@ export default function HeroSlider() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    address: "",
     phone: "",
+    education: "",
+    birthday: "",
+    certificate: null as File | null,
     message: "",
   });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    const { id, value, files } = e.target as HTMLInputElement;
+    if (id === "certificate" && files) {
+      setFormData((prev) => ({ ...prev, certificate: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [id]: value }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Submitted ✅", formData);
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    alert("Application submitted successfully ✅");
+    setFormData({
+      name: "",
+      email: "",
+      address: "",
+      phone: "",
+      education: "",
+      birthday: "",
+      certificate: null,
+      message: "",
+    });
     setIsFormOpen(false);
   };
 
   // === Background slides ===
   const slides = [
-    "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1950&q=80",
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80",
+    Automobile_Electrician,
+    Automobile_Machinist,
+    Automobile_Mechanic,
+    Automobile_Painter
+
   ];
 
   return (
@@ -65,38 +90,38 @@ export default function HeroSlider() {
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${img})` }}
             >
-              {/* Dark overlay */}
               <div className="w-full h-full bg-black/60"></div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* === Overlay Text + Button === */}
-      <div className="relative z-10 text-center px-4">
+      {/* === Overlay Text + Modern Apply Button === */}
+      <div className="relative z-10 text-center px-4 flex flex-col items-center justify-center">
         <h1 className="text-5xl md:text-7xl font-extrabold leading-tight drop-shadow-lg">
           Founded for Skill. <br /> Built for Industry.
         </h1>
-        <p className="mt-4 text-2xl md:text-3xl font-medium text-gray-200 drop-shadow-md">
+        <p className="mt-4 text-2xl md:text-3xl font-medium text-gray-200 drop-shadow-md max-w-2xl">
           Automobile Engineering Training Institute (AETI)
         </p>
         <Button
           onClick={() => setIsFormOpen(true)}
-          className="mt-8 px-10 py-5 text-lg rounded-2xl bg-red-600 hover:bg-red-500 transition duration-300 shadow-xl"
+          className="mt-10 px-12 py-5 text-lg font-semibold rounded-full bg-red-600 hover:bg-red-500 transition-transform duration-300 shadow-xl transform hover:-translate-y-1 hover:scale-105"
         >
           Apply Online
         </Button>
       </div>
 
-      {/* === Register Form Popup === */}
+      {/* === Advanced Register Form Popup === */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="sm:max-w-lg rounded-2xl bg-white p-6 text-black">
+        <DialogContent className="sm:max-w-lg rounded-3xl bg-white p-6 text-black overflow-y-auto max-h-[90vh]">
           <DialogHeader>
-            <DialogTitle>Apply Online</DialogTitle>
+            <DialogTitle>Advanced Registration Form</DialogTitle>
             <DialogDescription>
               Fill in your details and we’ll contact you soon.
             </DialogDescription>
           </DialogHeader>
+
           <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
             <div>
               <Label htmlFor="name">Full Name</Label>
@@ -104,10 +129,11 @@ export default function HeroSlider() {
                 id="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter your name"
+                placeholder="Enter your full name"
                 required
               />
             </div>
+
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -119,6 +145,18 @@ export default function HeroSlider() {
                 required
               />
             </div>
+
+            <div>
+              <Label htmlFor="address">Address</Label>
+              <Input
+                id="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Enter your address"
+                required
+              />
+            </div>
+
             <div>
               <Label htmlFor="phone">Phone Number</Label>
               <Input
@@ -129,6 +167,45 @@ export default function HeroSlider() {
                 required
               />
             </div>
+
+            <div>
+              <Label htmlFor="education">Educational Results (O/L or A/L)</Label>
+              <Input
+                id="education"
+                value={formData.education}
+                onChange={handleChange}
+                placeholder="e.g., O/L - 6C, 3S | A/L - 2B, 1C"
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="birthday">Birthday</Label>
+              <Input
+                id="birthday"
+                type="date"
+                value={formData.birthday}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="certificate">Certificate Attachment</Label>
+              <Input
+                id="certificate"
+                type="file"
+                accept=".jpg,.jpeg,.png,.pdf"
+                onChange={handleChange}
+                required
+              />
+              {formData.certificate && (
+                <p className="text-sm text-gray-600 mt-1">
+                  Selected: {formData.certificate.name}
+                </p>
+              )}
+            </div>
+
             <div>
               <Label htmlFor="message">Message</Label>
               <Textarea
@@ -138,10 +215,11 @@ export default function HeroSlider() {
                 placeholder="Any specific requests?"
               />
             </div>
+
             <DialogFooter>
               <Button
                 type="submit"
-                className="bg-red-600 hover:bg-red-500 text-white w-full"
+                className="bg-red-600 hover:bg-red-500 text-white w-full rounded-xl font-semibold py-3 transition-transform duration-300 transform hover:-translate-y-1"
               >
                 Submit Application
               </Button>
