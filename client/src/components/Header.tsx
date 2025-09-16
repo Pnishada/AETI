@@ -1,6 +1,6 @@
-"use client";
+// ✅ Correct: combine imports in one line
+import { useState, useEffect } from "react";
 
-import { useState } from "react";
 import { GraduationCap, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,16 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useLocation();
+
+  const navLinks = [
+    { name: "Home", route: "/" },
+    { name: "Discover AETI", route: "/about" },
+    { name: "Courses", sectionId: "courses" },
+    { name: "Downloads", route: "/download" },
+    { name: "Gallery", route: "/gallery" },
+    { name: "LMS", route: "/lms" },
+    { name: "Contact Us", route: "/Contact" },
+  ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -22,59 +32,22 @@ export default function Header() {
     }
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      window.scrollTo({
-        top: elementPosition + window.pageYOffset - headerOffset,
-        behavior: "smooth",
-      });
-    }
-  };
-
   const handleSectionClick = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-
-    if (location === "/") {
-      // Already on homepage, scroll immediately
-      scrollToSection(sectionId);
-    } else {
-      // Navigate to homepage first
-      setLocation(`/#${sectionId}`);
-
-      // Wait a little for page to render then scroll
-      setTimeout(() => {
-        scrollToSection(sectionId);
-      }, 150); // Increase if the page is heavy
-    }
+    setLocation(`/#${sectionId}`);
   };
-
-  const navLinks = [
-    { name: "Home", route: "/" },
-    { name: "Discover AETI", route: "/about" },
-    { name: "Courses", sectionId: "courses" },
-    { name: "Downloads", route: "/download" },
-    { name: "Gallery", route: "/gallery" },
-    { name: "LMS", route: "/lms" },
-  ];
 
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center space-x-3 hover:scale-105 transition-transform"
-          >
+          <Link href="/" className="flex items-center space-x-3 hover:scale-105 transition-transform">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_6px_20px_rgba(255,215,0,0.4)] transition-shadow">
               <GraduationCap className="text-[#8b1e1e] w-6 h-6" />
             </div>
-            <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">
-              AETI
-            </span>
+            <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">AETI</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -102,11 +75,8 @@ export default function Header() {
             )}
           </nav>
 
-          {/* Search */}
-          <form
-            onSubmit={handleSearch}
-            className="hidden md:flex items-center space-x-2"
-          >
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="hidden md:flex items-center space-x-2">
             <Input
               type="text"
               placeholder="Search..."
@@ -114,26 +84,18 @@ export default function Header() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-48 lg:w-64 rounded-lg bg-white text-black placeholder-gray-500"
             />
-            <Button
-              type="submit"
-              size="icon"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg"
-            >
+            <Button type="submit" size="icon" className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg">
               <Search className="w-5 h-5" />
             </Button>
           </form>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMobileMenu}
-              className="text-white"
-            >
+            <Button variant="ghost" size="icon" onClick={toggleMobileMenu} className="text-white">
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
+
         </div>
       </div>
 
@@ -171,11 +133,7 @@ export default function Header() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full rounded-lg bg-white text-black placeholder-gray-500"
             />
-            <Button
-              type="submit"
-              size="icon"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg"
-            >
+            <Button type="submit" size="icon" className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg">
               <Search className="w-5 h-5" />
             </Button>
           </form>

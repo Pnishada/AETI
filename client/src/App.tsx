@@ -19,7 +19,6 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/contact" component={ContactPage} />
         <Route path="/gallery" component={Gallery} />
         <Route path="/search" component={Search} />
         <Route path="/programs/:id" component={ProgramDetails} />
@@ -27,6 +26,7 @@ function Router() {
         <Route path="/download" component={DownloadPage} />
         <Route path="/staff" component={Staff} />
         <Route path="/departments" component={Departments} />
+        <Route path="/contact" component={ContactPage} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

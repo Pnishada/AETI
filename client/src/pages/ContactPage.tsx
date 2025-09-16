@@ -46,7 +46,6 @@ export default function ContactPage() {
 
   return (
     <>
-    <Header/>
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
       <Card className="w-full max-w-4xl shadow-lg rounded-2xl">
         <CardHeader>
@@ -125,7 +124,6 @@ export default function ContactPage() {
         </CardContent>
       </Card>
     </div>
-    <Footer/>
     </>
   );
 }
