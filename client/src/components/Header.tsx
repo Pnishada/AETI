@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+"use client";
+
+import { useState } from "react";
 import { GraduationCap, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,16 +9,16 @@ import { Link, useLocation } from "wouter";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const navLinks = [
     { name: "Home", route: "/" },
     { name: "Discover AETI", route: "/about" },
-    { name: "Courses", sectionId: "/CoursesSection" },
+    { name: "Courses", route: "/courses" },
     { name: "Downloads", route: "/download" },
     { name: "Gallery", route: "/gallery" },
     { name: "LMS", route: "/lms" },
-    { name: "Contact Us", route: "/Contact" },
+    { name: "Contact Us", route: "/contact" },
     { name: "Staff", route: "/staff" },
   ];
 
@@ -31,19 +33,18 @@ export default function Header() {
     }
   };
 
-  const handleSectionClick = (sectionId: string) => {
+  const goToCoursesTab = (type: "Full-Time" | "Part-Time") => {
     setIsMobileMenuOpen(false);
-    setLocation(`/#${sectionId}`);
+    setLocation(`/courses?type=${type}`);
   };
 
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 hover:scale-105 transition-transform">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_6px_20px_rgba(255,215,0,0.4)] transition-shadow">
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg transition-shadow">
               <GraduationCap className="text-[#8b1e1e] w-6 h-6" />
             </div>
             <span className="text-2xl md:text-3xl font-extrabold tracking-wide font-sans">AETI</span>
@@ -51,27 +52,29 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center space-x-8 font-medium">
-            {navLinks.map((link) =>
-              link.route ? (
-                <Link
-                  key={link.name}
-                  href={link.route}
-                  className={`hover:text-yellow-300 transition-colors ${
-                    location === link.route ? "text-yellow-300" : "text-white"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <button
-                  key={link.name}
-                  onClick={() => handleSectionClick(link.sectionId!)}
-                  className="hover:text-yellow-300 transition-colors"
-                >
-                  {link.name}
-                </button>
-              )
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.route}
+                className="hover:text-yellow-300 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            {/* Dropdown / Quick Course Links */}
+            <button
+              className="hover:text-yellow-300 transition-colors"
+              onClick={() => goToCoursesTab("Full-Time")}
+            >
+              Full-Time Courses
+            </button>
+            <button
+              className="hover:text-yellow-300 transition-colors"
+              onClick={() => goToCoursesTab("Part-Time")}
+            >
+              Part-Time Courses
+            </button>
           </nav>
 
           {/* Search Bar */}
@@ -94,7 +97,6 @@ export default function Header() {
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
-
         </div>
       </div>
 
@@ -102,26 +104,28 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-gradient-to-b from-[#7b1e1e] to-[#5a0f0f] px-4 pt-2 pb-6 space-y-4">
           <nav className="flex flex-col space-y-3 font-medium">
-            {navLinks.map((link) =>
-              link.route ? (
-                <Link
-                  key={link.name}
-                  href={link.route}
-                  className="text-white hover:text-yellow-300 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <button
-                  key={link.name}
-                  onClick={() => handleSectionClick(link.sectionId!)}
-                  className="text-white hover:text-yellow-300 transition-colors text-left"
-                >
-                  {link.name}
-                </button>
-              )
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.route}
+                className="text-white hover:text-yellow-300 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <button
+              className="text-white hover:text-yellow-300 transition-colors text-left"
+              onClick={() => goToCoursesTab("Full-Time")}
+            >
+              Full-Time Courses
+            </button>
+            <button
+              className="text-white hover:text-yellow-300 transition-colors text-left"
+              onClick={() => goToCoursesTab("Part-Time")}
+            >
+              Part-Time Courses
+            </button>
           </nav>
 
           <form onSubmit={handleSearch} className="flex items-center space-x-2 pt-4">

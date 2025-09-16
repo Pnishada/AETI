@@ -12,7 +12,8 @@ import DownloadPage from "@/pages/download";
 import Staff from "@/pages/staff";
 import Departments from "@/pages/depatment";
 import ContactPage from "@/pages/ContactPage";
-import CoursesSection from "./components/CoursesSection";
+import CoursesPage from "@/pages/CoursesPage";
+import CoursesPreview from "@/components/CoursesPreview";
 
 function Router() {
   return (
@@ -27,7 +28,20 @@ function Router() {
         <Route path="/download" component={DownloadPage} />
         <Route path="/staff" component={Staff} />
         <Route path="/contact" component={ContactPage} />
-        <Route path="/courses" component={CoursesSection} />
+
+        {/* Courses */}
+        <Route path="/courses" component={CoursesPage} />
+        
+        {/* Course Preview redirects to /courses */}
+        <Route
+          path="/coursePreview"
+          component={() => {
+            window.location.href = "/courses";
+            return null;
+          }}
+        />
+
+        <Route path="/departments" component={Departments} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -5,26 +5,10 @@ import { GraduationCap, Phone, Mail, MapPin, Printer } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      window.scrollTo({
-        top: elementPosition + window.pageYOffset - headerOffset,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const handleSectionClick = (sectionId: string) => {
-    if (location === "/") {
-      scrollToSection(sectionId);
-    } else {
-      setLocation(`/#${sectionId}`);
-    }
+  const goToCoursesTab = (type: "Full-Time" | "Part-Time") => {
+    setLocation(`/courses?type=${type}`);
   };
 
   const linkHover = {
@@ -39,7 +23,7 @@ export default function Footer() {
           {/* Logo & Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(139,28,28,0.5)]">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
                 <GraduationCap className="text-[#8b1e1e] w-6 h-6" />
               </div>
               <span className="text-2xl font-bold">AETI</span>
@@ -55,7 +39,8 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-slate-200">
               <motion.li {...linkHover}><Link href="/">Home</Link></motion.li>
               <motion.li {...linkHover}><Link href="/about">Discover AETI</Link></motion.li>
-              <motion.li {...linkHover}><button onClick={() => handleSectionClick("courses")}>Courses</button></motion.li>
+              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Full-Time")}>Full-Time Courses</button></motion.li>
+              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Part-Time")}>Part-Time Courses</button></motion.li>
               <motion.li {...linkHover}><Link href="/download">Downloads</Link></motion.li>
               <motion.li {...linkHover}><Link href="/gallery">Gallery</Link></motion.li>
               <motion.li {...linkHover}><Link href="/lms">LMS</Link></motion.li>
@@ -66,10 +51,8 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-lg">Services</h4>
             <ul className="space-y-3 text-sm text-slate-200">
-              <motion.li {...linkHover}><button onClick={() => handleSectionClick("apprenticeships")}>Part-time Programs</button></motion.li>
-              <motion.li {...linkHover}><button onClick={() => handleSectionClick("nvq")}>Tri-Force Programs</button></motion.li>
-              <motion.li {...linkHover}><button onClick={() => handleSectionClick("career")}>Career Development</button></motion.li>
-              <motion.li {...linkHover}><button onClick={() => handleSectionClick("partnerships")}>Industry Partnerships</button></motion.li>
+              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Part-Time")}>Part-time Programs</button></motion.li>
+              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Full-Time")}>Tri-Force Programs</button></motion.li>
             </ul>
           </div>
 
