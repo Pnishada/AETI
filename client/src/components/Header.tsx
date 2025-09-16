@@ -14,11 +14,12 @@ export default function Header() {
   const navLinks = [
     { name: "Home", route: "/" },
     { name: "Discover AETI", route: "/about" },
-    { name: "Courses", sectionId: "/courses" },
+    { name: "Courses", sectionId: "/CoursesSection" },
     { name: "Downloads", route: "/download" },
     { name: "Gallery", route: "/gallery" },
     { name: "LMS", route: "/lms" },
     { name: "Contact Us", route: "/Contact" },
+    { name: "Staff", route: "/staff" },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
