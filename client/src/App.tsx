@@ -12,6 +12,7 @@ import DownloadPage from "@/pages/download";
 import Staff from "@/pages/staff";
 import Departments from "@/pages/depatment";
 import ContactPage from "@/pages/ContactPage";
+import CoursesSection from "./components/CoursesSection";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
         <Route path="/staff" component={Staff} />
         <Route path="/departments" component={Departments} />
         <Route path="/contact" component={ContactPage} />
+        <Route path="/courses" component={CoursesSection} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
