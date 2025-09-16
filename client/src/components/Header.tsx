@@ -14,7 +14,7 @@ export default function Header() {
   const navLinks = [
     { name: "Home", route: "/" },
     { name: "Discover AETI", route: "/about" },
-    { name: "Courses", sectionId: "courses" },
+    { name: "Courses", sectionId: "/courses" },
     { name: "Downloads", route: "/download" },
     { name: "Gallery", route: "/gallery" },
     { name: "LMS", route: "/lms" },
