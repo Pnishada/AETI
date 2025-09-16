@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { GraduationCap, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,43 +22,43 @@ export default function Header() {
     }
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      window.scrollTo({
+        top: elementPosition + window.pageYOffset - headerOffset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   const handleSectionClick = (sectionId: string) => {
     setIsMobileMenuOpen(false);
 
     if (location === "/") {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        window.scrollTo({
-          top: elementPosition + window.pageYOffset - headerOffset,
-          behavior: "smooth",
-        });
-      }
+      // Already on homepage, scroll immediately
+      scrollToSection(sectionId);
     } else {
-      setLocation("/");
+      // Navigate to homepage first
+      setLocation(`/#${sectionId}`);
+
+      // Wait a little for page to render then scroll
       setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const headerOffset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          window.scrollTo({
-            top: elementPosition + window.pageYOffset - headerOffset,
-            behavior: "smooth",
-          });
-        }
-      }, 500);
+        scrollToSection(sectionId);
+      }, 150); // Increase if the page is heavy
     }
   };
 
   const navLinks = [
-  { name: "Home", route: "/" },
-  { name: "Discover AETI", route: "/about" },
-  { name: "Courses", route: "/CoursesSection" },
-  { name: "Downloads", route: "/download" },
-  { name: "Gallery", route: "/gallery" },
-  { name: "LMS", route: "/lms" }, // LMS page eka create karanna oni
-];
+    { name: "Home", route: "/" },
+    { name: "Discover AETI", route: "/about" },
+    { name: "Courses", sectionId: "courses" },
+    { name: "Downloads", route: "/download" },
+    { name: "Gallery", route: "/gallery" },
+    { name: "LMS", route: "/lms" },
+  ];
 
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
@@ -75,7 +77,7 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center space-x-8 font-medium">
             {navLinks.map((link) =>
               link.route ? (
@@ -91,11 +93,7 @@ export default function Header() {
               ) : (
                 <button
                   key={link.name}
-                  onClick={() =>
-                    handleSectionClick(
-                      link.name.toLowerCase().replace(/\s+/g, "-")
-                    )
-                  }
+                  onClick={() => handleSectionClick(link.sectionId!)}
                   className="hover:text-yellow-300 transition-colors"
                 >
                   {link.name}
@@ -104,7 +102,7 @@ export default function Header() {
             )}
           </nav>
 
-          {/* Search Bar */}
+          {/* Search */}
           <form
             onSubmit={handleSearch}
             className="hidden md:flex items-center space-x-2"
@@ -133,11 +131,7 @@ export default function Header() {
               onClick={toggleMobileMenu}
               className="text-white"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -160,11 +154,7 @@ export default function Header() {
               ) : (
                 <button
                   key={link.name}
-                  onClick={() =>
-                    handleSectionClick(
-                      link.name.toLowerCase().replace(/\s+/g, "-")
-                    )
-                  }
+                  onClick={() => handleSectionClick(link.sectionId!)}
                   className="text-white hover:text-yellow-300 transition-colors text-left"
                 >
                   {link.name}
@@ -173,10 +163,7 @@ export default function Header() {
             )}
           </nav>
 
-          <form
-            onSubmit={handleSearch}
-            className="flex items-center space-x-2 pt-4"
-          >
+          <form onSubmit={handleSearch} className="flex items-center space-x-2 pt-4">
             <Input
               type="text"
               placeholder="Search..."

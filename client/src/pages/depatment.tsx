@@ -64,7 +64,6 @@ export default function Departments() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
 
       <main className="py-16 lg:py-24 flex-1">
         <div className="container mx-auto p-6">
@@ -236,7 +235,7 @@ export default function Departments() {
         </div>
       </section>
 
-      <Footer />
+
     </div>
   );
 }

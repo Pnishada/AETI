@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Header from "../components/Header"; // Header component
-import Footer from "../components/Footer"; // Footer component
 import { motion } from "framer-motion";
 import { Card, CardContent } from "../components/ui/card";
 import { Building2, Award, Users } from "lucide-react";
@@ -24,8 +22,6 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      {/* Header */}
-      <Header />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 px-6 py-20 items-center">
@@ -199,9 +195,6 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

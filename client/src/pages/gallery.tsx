@@ -16,7 +16,7 @@ export default function Gallery() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      
 
       {/* Hero Section */}
       <section className="bg-gray-50 py-16 lg:py-24">
@@ -57,7 +57,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 }
