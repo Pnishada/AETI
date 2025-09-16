@@ -1,6 +1,4 @@
-// ✅ Correct: combine imports in one line
 import { useState, useEffect } from "react";
-
 import { GraduationCap, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
