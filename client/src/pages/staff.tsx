@@ -9,7 +9,7 @@ const StaffPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Header */}
-      <Header />
+      
 
       {/* Hero Section */}
       <section
@@ -81,7 +81,7 @@ const StaffPage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <Footer />
+      
     </div>
   );
 };
