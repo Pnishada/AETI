@@ -26,7 +26,6 @@ function Router() {
         <Route path="/news" component={NewsPage} />
         <Route path="/download" component={DownloadPage} />
         <Route path="/staff" component={Staff} />
-        <Route path="/departments" component={Departments} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/courses" component={CoursesSection} />
         <Route component={NotFound} />
