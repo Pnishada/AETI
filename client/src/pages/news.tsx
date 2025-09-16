@@ -58,7 +58,7 @@ const NewsPage: React.FC = () => {
 
   return (
     <>
-      <Header />
+      
 
       {/* Hero Banner */}
       <section className="relative bg-white text-black py-16 px-6 text-center">
@@ -150,7 +150,6 @@ const NewsPage: React.FC = () => {
         </section>
       </div>
 
-      <Footer />
     </>
   );
 };
