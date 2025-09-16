@@ -19,29 +19,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import Header from "./Header";
 import Footer from "./Footer";
-
-interface Course {
-  id: string;
-  icon: React.ComponentType<any>;
-  title: string;
-  image: string;
-  description: string;
-  fee: string;
-  duration: string;
-  method: string;
-  type: "Full-Time" | "Part-Time";
-}
+import Header from "./Header";
 
 export default function CoursesSection() {
-  const courses: Course[] = [
-    // ✅ Full-Time + Part-Time courses list (unchanged)
+  // === Course Data ===
+  const courses = [
+    // ==== Full-Time Courses ====
     {
-      id: "AM",
+      id: "Automobile Mechanic",
       icon: Hammer,
-      title: "Automobile Mechanic",
-      image: "src/components/assets/Automobile Mechanic.jpg",
+      title: "Automobile Mechanic (AM)",
+      image: "/src/components/assets/Automobile Mechanic.jpg",
       description:
         "Learn practical and theoretical aspects of modern automobile mechanics with hands-on training.",
       fee: "200,000",
@@ -50,10 +39,10 @@ export default function CoursesSection() {
       type: "Full-Time",
     },
     {
-      id: "AE",
+      id: "Automobile Electrician",
       icon: Bolt,
-      title: "Automobile Electrician",
-      image: "src/components/assets/Automobile Electrician.jpg",
+      title: "Automobile Electrician (AE)",
+      image: "/src/components/assets/Automobile Electrician.jpg",
       description:
         "Specialize in automobile electrical systems, diagnostics, and maintenance.",
       fee: "200,000",
@@ -62,10 +51,10 @@ export default function CoursesSection() {
       type: "Full-Time",
     },
     {
-      id: "MC",
+      id: "Machinist",
       icon: Wrench,
-      title: "Machinist",
-      image: "src/components/assets/Automobile Machinist.jpg",
+      title: "Machinist (MC)",
+      image: "/src/components/assets/Automobile Machinist.jpg",
       description:
         "Develop machining and repair skills for automobile components and parts.",
       fee: "170,000",
@@ -74,102 +63,112 @@ export default function CoursesSection() {
       type: "Full-Time",
     },
     {
-      id: "A/C",
+      id: "Automobile Air Condition Mechanic",
       icon: Snowflake,
-      title: "Automobile A/C Mechanic",
-      image: "src/components/assets/Automobile Air Condition Mechanic.jpg",
+      title: "Automobile A/C Mechanic (A/C)",
+      image: "/src/components/assets/Automobile Air Condition Mechanic.jpg",
       description:
         "Master automobile A/C repair, installation, and troubleshooting techniques.",
-      fee: "70,000",
+      fee: "180,000",
       duration: "2 years",
       method: "1 year Institutional; 1 year Industrial",
       type: "Full-Time",
     },
     {
-      id: "AP",
+      id: "Automobile Painter",
       icon: Paintbrush,
       title: "Automobile Painter",
-      image: "src/components/assets/Automobile Painter.jpg",
+      image: "/src/components/assets/Automobile Painter.jpg",
       description: "Learn professional automobile painting and finishing skills.",
-      fee: "30,000",
-      duration: "1½ years",
-      method: "6 months Institutional; 1 year Industrial",
+      fee: "150,000",
+      duration: "2 years",
+      method: "1 year Institutional; 1 year Industrial",
       type: "Full-Time",
     },
     {
-      id: "AT",
+      id: "Automobile Tinker",
       icon: Car,
       title: "Automobile Tinker",
-      image: "src/components/assets/Automobile Tinker.jpg",
-      description: "Comprehensive training covering practical automobile work.",
-      fee: "40,000",
-      duration: "1½ years",
-      method: "6 months Institutional; 1 year Industrial",
+      image: "/src/components/assets/Automobile Tinker.jpg",
+      description: "Comprehensive training covering practical automobile body work.",
+      fee: "150,000",
+      duration: "2 years",
+      method: "1 year Institutional; 1 year Industrial",
       type: "Full-Time",
     },
+
+    // ==== Part-Time Courses ====
     {
-      id: "AMP1",
+      id: "Auto Mechanical Part I",
       icon: Hammer,
       title: "Auto Mechanical Part I (Engine Mechanism)",
-      image: "src/components/assets/Auto Mechanical Part I.jpg",
-      description:
-        "Introduction to engine mechanism and fundamentals of automotive systems.",
-      fee: "25,000",
+      image: "/src/components/assets/Auto Mechanical Part 1.jpg",
+      description: "Covers fundamental engine mechanism training.",
+      fee: "60,000",
       duration: "6 months",
-      method: "Institutional",
+      method: "Evening / Weekend Classes",
       type: "Part-Time",
     },
     {
-      id: "AMP2",
+      id: "Auto Mechanical Part II",
       icon: Wrench,
       title: "Auto Mechanical Part II (Chassis Mechanism)",
-      image: "src/components/assets/Auto Mechanical Part II.jpg",
-      description: "Focus on chassis systems and mechanical assembly techniques.",
-      fee: "25,000",
+      image: "/src/components/assets/Auto Mechanical Part 2.jpg",
+      description: "Focuses on chassis mechanism and repair training.",
+      fee: "65,000",
       duration: "6 months",
-      method: "Institutional",
+      method: "Evening / Weekend Classes",
       type: "Part-Time",
     },
     {
-      id: "AMP3",
-      icon: Wrench,
-      title: "Auto Mechanical Part III (Advance Course)",
-      image: "src/components/assets/Auto Mechanical Part III.jpg",
-      description:
-        "Advanced mechanical training for automobile repairs and diagnostics.",
-      fee: "30,000",
-      duration: "1 year",
-      method: "Institutional + Industrial",
-      type: "Part-Time",
-    },
-    {
-      id: "MTE",
+      id: "Auto Mechanical Part III",
       icon: Bolt,
-      title: "Modern Technology Engine Tune-Up",
-      image: "src/components/assets/Modern Technology Engine Tune-Up.jpg",
-      description:
-        "Learn modern engine tuning techniques including fuel injection systems.",
-      fee: "35,000",
+      title: "Auto Mechanical Part III (Advance Course)",
+      image: "/src/components/assets/Auto Mechanical Part 3.jpg",
+      description: "Advanced automobile mechanical training for professionals.",
+      fee: "70,000",
       duration: "6 months",
-      method: "Institutional",
+      method: "Evening / Weekend Classes",
       type: "Part-Time",
     },
     {
-      id: "EFI",
+      id: "Modern Technology",
+      icon: Car,
+      title: "Modern Technology",
+      image: "/src/components/assets/Modern Technology.jpg",
+      description: "Learn about modern automobile technology and innovations.",
+      fee: "75,000",
+      duration: "6 months",
+      method: "Evening / Weekend Classes",
+      type: "Part-Time",
+    },
+    {
+      id: "Engine Tune-Up",
+      icon: Wrench,
+      title: "Engine Tune-Up",
+      image: "/src/components/assets/Engine Tune-Up.jpg",
+      description: "Practical training for engine tune-up and efficiency improvement.",
+      fee: "40,000",
+      duration: "3 months",
+      method: "Weekend Classes",
+      type: "Part-Time",
+    },
+    {
+      id: "EFI Systems",
       icon: Bolt,
       title: "EFI Systems",
-      image: "src/components/assets/EFI Systems.jpg",
-      description: "Specialized course on Electronic Fuel Injection systems.",
-      fee: "35,000",
-      duration: "6 months",
-      method: "Institutional",
+      image: "/src/components/assets/EFI Systems.jpg",
+      description: "Specialized training in Electronic Fuel Injection systems.",
+      fee: "45,000",
+      duration: "3 months",
+      method: "Weekend Classes",
       type: "Part-Time",
     },
   ];
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [visibleIndexes, setVisibleIndexes] = useState<number[]>([]);
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({
     course: "",
@@ -201,7 +200,6 @@ export default function CoursesSection() {
 
     const children = containerRef.current?.children;
     if (children) Array.from(children).forEach((child) => observer.observe(child));
-
     return () => observer.disconnect();
   }, []);
 
@@ -220,17 +218,14 @@ export default function CoursesSection() {
   };
 
   return (
-    <>
-      {/* ✅ Header always top */}
-      <Header />
-
-      <section className="px-4 py-12 max-w-7xl mx-auto">
+    <section className="bg-white py-16 lg:py-24" id="courses">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-red-800 mb-4">
+          <h2 className="text-3xl lg:text-4xl font-extrabold text-red-900 mb-4">
             Courses & Training Categories
           </h2>
-          <p className="text-gray-700">
+          <p className="text-gray-700 max-w-2xl mx-auto">
             Choose from Full-Time or Part-Time courses tailored to your career
             goals.
           </p>
@@ -291,10 +286,7 @@ export default function CoursesSection() {
                     className="text-red-800 hover:text-red-900 font-medium transition-colors p-0"
                     onClick={() => {
                       setSelectedCourse(course);
-                      setFormData((prev) => ({
-                        ...prev,
-                        course: course.title,
-                      }));
+                      setFormData((prev) => ({ ...prev, course: course.title }));
                     }}
                   >
                     View Details
@@ -303,144 +295,139 @@ export default function CoursesSection() {
               );
             })}
         </div>
+      </div>
 
-        {/* ✅ Course Details Popup */}
-        <Dialog
-          open={!!selectedCourse}
-          onOpenChange={() => setSelectedCourse(null)}
-        >
-          <DialogContent className="sm:max-w-3xl p-0 overflow-hidden rounded-3xl shadow-xl">
-            {selectedCourse && (
-              <>
-                <div className="relative h-64 sm:h-80 w-full">
-                  <img
-                    src={selectedCourse.image}
-                    alt={selectedCourse.title}
-                    className="absolute inset-0 w-full h-full object-cover rounded-t-3xl"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent rounded-t-3xl" />
-                  <div className="absolute bottom-6 left-6 flex flex-col gap-2 text-white">
-                    <div className="w-12 h-12 bg-red-700 rounded-xl flex items-center justify-center shadow-lg">
-                      <selectedCourse.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h2 className="text-xl sm:text-2xl font-bold">
-                      {selectedCourse.title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-gray-200 max-w-xs">
-                      {selectedCourse.description}
-                    </p>
+      {/* Course Details Popup */}
+      <Dialog open={!!selectedCourse} onOpenChange={() => setSelectedCourse(null)}>
+        <DialogContent className="sm:max-w-3xl p-0 overflow-hidden rounded-3xl shadow-xl">
+          {selectedCourse && (
+            <>
+              <div className="relative h-64 sm:h-80 w-full">
+                <img
+                  src={selectedCourse.image}
+                  alt={selectedCourse.title}
+                  className="absolute inset-0 w-full h-full object-cover rounded-t-3xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent rounded-t-3xl" />
+                <div className="absolute bottom-6 left-6 flex flex-col gap-2 text-white">
+                  <div className="w-12 h-12 bg-red-700 rounded-xl flex items-center justify-center shadow-lg">
+                    {/* ✅ Fixed icon rendering */}
+                    <selectedCourse.icon className="w-6 h-6 text-white" />
                   </div>
+                  <h2 className="text-xl sm:text-2xl font-bold">
+                    {selectedCourse.title}
+                  </h2>
+                  <p className="text-sm sm:text-base text-gray-200 max-w-xs">
+                    {selectedCourse.description}
+                  </p>
                 </div>
+              </div>
 
-                <div className="p-6 space-y-6">
-                  <table className="w-full text-left border-collapse">
-                    <tbody>
-                      <tr className="border-b">
-                        <th className="py-2 px-4 font-medium">Fee (Rs.)</th>
-                        <td className="py-2 px-4">{selectedCourse.fee}</td>
-                      </tr>
-                      <tr className="border-b">
-                        <th className="py-2 px-4 font-medium">Duration</th>
-                        <td className="py-2 px-4">{selectedCourse.duration}</td>
-                      </tr>
-                      <tr className="border-b">
-                        <th className="py-2 px-4 font-medium">Training Method</th>
-                        <td className="py-2 px-4">{selectedCourse.method}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="p-6 space-y-6">
+                <table className="w-full text-left border-collapse">
+                  <tbody>
+                    <tr className="border-b">
+                      <th className="py-2 px-4 font-medium">Fee (Rs.)</th>
+                      <td className="py-2 px-4">{selectedCourse.fee}</td>
+                    </tr>
+                    <tr className="border-b">
+                      <th className="py-2 px-4 font-medium">Duration</th>
+                      <td className="py-2 px-4">{selectedCourse.duration}</td>
+                    </tr>
+                    <tr className="border-b">
+                      <th className="py-2 px-4 font-medium">Training Method</th>
+                      <td className="py-2 px-4">{selectedCourse.method}</td>
+                    </tr>
+                  </tbody>
+                </table>
 
-                  <DialogFooter className="pt-4">
-                    <Button
-                      onClick={() => {
-                        setIsFormOpen(true);
-                        setSelectedCourse(null);
-                      }}
-                      className="bg-red-700 hover:bg-red-800 text-white rounded-lg px-6 py-2 shadow-md hover:shadow-lg transition"
-                    >
-                      Enroll Now
-                    </Button>
-                  </DialogFooter>
-                </div>
-              </>
-            )}
-          </DialogContent>
-        </Dialog>
+                <DialogFooter className="pt-4">
+                  <Button
+                    onClick={() => {
+                      setIsFormOpen(true);
+                      setSelectedCourse(null);
+                    }}
+                    className="bg-red-700 hover:bg-red-800 text-white rounded-lg px-6 py-2 shadow-md hover:shadow-lg transition"
+                  >
+                    Enroll Now
+                  </Button>
+                </DialogFooter>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
-        {/* ✅ Enroll Form Popup */}
-        <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-          <DialogContent className="sm:max-w-lg">
-            <DialogHeader>
-              <DialogTitle>Enroll Now</DialogTitle>
-              <DialogDescription>
-                Fill in your details and we’ll contact you soon.
-              </DialogDescription>
-            </DialogHeader>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <Label htmlFor="course">Course</Label>
-                <Input
-                  id="course"
-                  value={formData.course}
-                  readOnly
-                  className="bg-gray-100 font-semibold"
-                />
-              </div>
-              <div>
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input
-                  id="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Enter your phone number"
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="message">Message</Label>
-                <Textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Any specific requests?"
-                />
-              </div>
-              <DialogFooter>
-                <Button
-                  type="submit"
-                  className="bg-red-700 hover:bg-red-800 text-white"
-                >
-                  Submit Application
-                </Button>
-              </DialogFooter>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </section>
-
-      {/* ✅ Footer always bottom */}
-      <Footer />
+      {/* Enroll Form Popup */}
+      <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Enroll Now</DialogTitle>
+            <DialogDescription>
+              Fill in your details and we’ll contact you soon.
+            </DialogDescription>
+          </DialogHeader>
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <Label htmlFor="course">Course</Label>
+              <Input
+                id="course"
+                value={formData.course}
+                readOnly
+                className="bg-gray-100 font-semibold"
+              />
+            </div>
+            <div>
+              <Label htmlFor="name">Full Name</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Any specific requests?"
+              />
+            </div>
+            <DialogFooter>
+              <Button
+                type="submit"
+                className="bg-red-700 hover:bg-red-800 text-white"
+              >
+                Submit Application
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <style>{`
         @keyframes bounce-slow {
@@ -451,6 +438,6 @@ export default function CoursesSection() {
           animation: bounce-slow 2s infinite;
         }
       `}</style>
-    </>
+    </section>
   );
 }
