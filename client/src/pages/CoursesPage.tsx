@@ -6,33 +6,31 @@ import CourseDetailsDialog from "@/components/CoursesDetailsDialog";
 import { Course, courses } from "@/data/Courses";
 
 export default function CoursesPage() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const coursesRef = useRef<HTMLDivElement>(null);
 
-  // Read query param for tab selection
-  const queryParams = new URLSearchParams(location.split("?")[1]);
-  const initialType = queryParams.get("type") as "Full-Time" | "Part-Time" | null;
-
-  const [activeTab, setActiveTab] = useState<"All" | "Full-Time" | "Part-Time">(
-    initialType || "All"
-  );
+  const [activeTab, setActiveTab] = useState<"All" | "Full-Time" | "Part-Time">("All");
   const [search, setSearch] = useState("");
   const [durationFilter, setDurationFilter] = useState("All");
-
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [enrollCourse, setEnrollCourse] = useState<Course | null>(null);
 
-  // Auto-select tab from query param and scroll to grid
+  // Read `type` from query params and update tab + scroll
   useEffect(() => {
-    if (initialType) {
-      setActiveTab(initialType);
+    const queryParams = new URLSearchParams(location.split("?")[1]);
+    const typeParam = queryParams.get("type");
+
+    if (typeParam === "Full-Time" || typeParam === "Part-Time") {
+      setActiveTab(typeParam); // highlight the tab
       setTimeout(() => {
         coursesRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+      }, 200);
+    } else {
+      setActiveTab("All");
     }
-  }, [initialType]);
+  }, [location]);
 
-  // Filtered courses based on tab, search, duration
+  // Filter courses based on activeTab, search, and duration
   const displayedCourses = useMemo(() => {
     let filtered =
       activeTab === "All"
@@ -54,14 +52,14 @@ export default function CoursesPage() {
     return filtered;
   }, [activeTab, search, durationFilter]);
 
-  // Dynamically compute available durations for filter
+  // Available durations
   const availableDurations = useMemo(() => {
     const filteredCourses =
       activeTab === "All"
         ? courses
         : courses.filter((c) => c.type === activeTab);
-    const durations = Array.from(new Set(filteredCourses.map((c) => c.duration)));
-    return ["All", ...durations];
+
+    return ["All", ...Array.from(new Set(filteredCourses.map((c) => c.duration)))];
   }, [activeTab]);
 
   return (
@@ -77,7 +75,11 @@ export default function CoursesPage() {
             key={tab}
             onClick={() => {
               setActiveTab(tab as "All" | "Full-Time" | "Part-Time");
-              setDurationFilter("All"); // Reset duration when tab changes
+              setDurationFilter("All");
+              setLocation(`/courses?type=${tab}`); // update URL
+              setTimeout(() => {
+                coursesRef.current?.scrollIntoView({ behavior: "smooth" });
+              }, 200);
             }}
             className={`px-6 py-2 font-semibold rounded-lg transition mx-2 ${
               activeTab === tab
@@ -90,22 +92,18 @@ export default function CoursesPage() {
         ))}
       </div>
 
-      {/* Search + Duration Filter */}
+      {/* Search + Filter */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-10">
-        {/* Search */}
         <input
           type="text"
           placeholder="Search courses..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-600 focus:outline-none"
-          aria-label="Search courses"
         />
-
-        {/* Duration Filter */}
-        <div className="flex flex-col w-full sm:w-auto">
+        <div className="w-full sm:w-auto">
           <label htmlFor="durationFilter" className="sr-only">
-            Filter courses by duration
+            Filter by duration
           </label>
           <select
             id="durationFilter"

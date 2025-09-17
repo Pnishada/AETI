@@ -33,11 +33,6 @@ export default function Header() {
     }
   };
 
-  const goToCoursesTab = (type: "Full-Time" | "Part-Time") => {
-    setIsMobileMenuOpen(false);
-    setLocation(`/courses?type=${type}`);
-  };
-
   return (
     <header className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,19 +57,6 @@ export default function Header() {
                 {link.name}
               </Link>
             ))}
-            {/* Dropdown / Quick Course Links */}
-            <button
-              className="hover:text-yellow-300 transition-colors"
-              onClick={() => goToCoursesTab("Full-Time")}
-            >
-              Full-Time Courses
-            </button>
-            <button
-              className="hover:text-yellow-300 transition-colors"
-              onClick={() => goToCoursesTab("Part-Time")}
-            >
-              Part-Time Courses
-            </button>
           </nav>
 
           {/* Search Bar */}
@@ -114,18 +96,6 @@ export default function Header() {
                 {link.name}
               </Link>
             ))}
-            <button
-              className="text-white hover:text-yellow-300 transition-colors text-left"
-              onClick={() => goToCoursesTab("Full-Time")}
-            >
-              Full-Time Courses
-            </button>
-            <button
-              className="text-white hover:text-yellow-300 transition-colors text-left"
-              onClick={() => goToCoursesTab("Part-Time")}
-            >
-              Part-Time Courses
-            </button>
           </nav>
 
           <form onSubmit={handleSearch} className="flex items-center space-x-2 pt-4">

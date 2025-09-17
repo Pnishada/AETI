@@ -1,15 +1,12 @@
 "use client";
 
-import { useLocation, Link } from "wouter";
-import { GraduationCap, Phone, Mail, MapPin, Printer } from "lucide-react";
-import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { GraduationCap, Phone, Mail, MapPin, Printer, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 export default function Footer() {
-  const [, setLocation] = useLocation();
-
-  const goToCoursesTab = (type: "Full-Time" | "Part-Time") => {
-    setLocation(`/courses?type=${type}`);
-  };
+  const [open, setOpen] = useState(false);
 
   const linkHover = {
     whileHover: { scale: 1.05, color: "#ffffff" },
@@ -39,8 +36,38 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-slate-200">
               <motion.li {...linkHover}><Link href="/">Home</Link></motion.li>
               <motion.li {...linkHover}><Link href="/about">Discover AETI</Link></motion.li>
-              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Full-Time")}>Full-Time Courses</button></motion.li>
-              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Part-Time")}>Part-Time Courses</button></motion.li>
+
+              {/* Collapsible Courses */}
+              <li>
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="flex items-center space-x-1 focus:outline-none"
+                >
+                  <span>Courses</span>
+                  <motion.div
+                    animate={{ rotate: open ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-4 h-4 opacity-70" />
+                  </motion.div>
+                </button>
+
+                <AnimatePresence>
+                  {open && (
+                    <motion.ul
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="ml-4 mt-2 space-y-2 text-slate-300 text-xs overflow-hidden"
+                    >
+                      <li><Link href="/courses?type=Full-Time">Full-Time</Link></li>
+                      <li><Link href="/courses?type=Part-Time">Part-Time</Link></li>
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </li>
+
               <motion.li {...linkHover}><Link href="/download">Downloads</Link></motion.li>
               <motion.li {...linkHover}><Link href="/gallery">Gallery</Link></motion.li>
               <motion.li {...linkHover}><Link href="/lms">LMS</Link></motion.li>
@@ -51,8 +78,8 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-lg">Services</h4>
             <ul className="space-y-3 text-sm text-slate-200">
-              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Part-Time")}>Part-time Programs</button></motion.li>
-              <motion.li {...linkHover}><button onClick={() => goToCoursesTab("Full-Time")}>Tri-Force Programs</button></motion.li>
+              <motion.li {...linkHover}><Link href="/courses">Training Programs</Link></motion.li>
+              <motion.li {...linkHover}><Link href="/download">Student Resources</Link></motion.li>
             </ul>
           </div>
 
@@ -63,14 +90,29 @@ export default function Footer() {
               <motion.li {...linkHover} className="flex items-start">
                 <MapPin className="w-4 h-4 mr-2 mt-1" />
                 <span>
-                  <a href="https://maps.app.goo.gl/jK8RepHHaRVSaRJGA" target="_blank" rel="noopener noreferrer" className="hover:text-white underline">
-                    Automobile Engineering Training Institute <br />69/A, Baseline Road, Orugodawatta
+                  <a
+                    href="https://maps.app.goo.gl/jK8RepHHaRVSaRJGA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white underline"
+                  >
+                    Automobile Engineering Training Institute <br />
+                    69/A, Baseline Road, Orugodawatta
                   </a>
                 </span>
               </motion.li>
-              <motion.li {...linkHover} className="flex items-start"><Phone className="w-4 h-4 mr-2 mt-1" /> <a href="tel:+94112244333">+94 11 224 4333</a></motion.li>
-              <motion.li {...linkHover} className="flex items-start"><Mail className="w-4 h-4 mr-2 mt-1" /> <a href="mailto:info@aeti.lk">info@aeti.lk</a></motion.li>
-              <motion.li {...linkHover} className="flex items-start"><Printer className="w-4 h-4 mr-2 mt-1" /> <a href="fax:+94112244333">+94 11 224 4333</a></motion.li>
+              <motion.li {...linkHover} className="flex items-start">
+                <Phone className="w-4 h-4 mr-2 mt-1" />
+                <a href="tel:+94112244333">+94 11 224 4333</a>
+              </motion.li>
+              <motion.li {...linkHover} className="flex items-start">
+                <Mail className="w-4 h-4 mr-2 mt-1" />
+                <a href="mailto:info@aeti.lk">info@aeti.lk</a>
+              </motion.li>
+              <motion.li {...linkHover} className="flex items-start">
+                <Printer className="w-4 h-4 mr-2 mt-1" />
+                <a href="fax:+94112244333">+94 11 224 4333</a>
+              </motion.li>
             </ul>
           </div>
         </div>

@@ -11,7 +11,7 @@ export default function CoursesPreview() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [enrollCourse, setEnrollCourse] = useState<Course | null>(null);
 
-  // Preview courses
+  // Preview courses (first 2 of each type)
   const fullTime = courses.filter((c) => c.type === "Full-Time").slice(0, 2);
   const partTime = courses.filter((c) => c.type === "Part-Time").slice(0, 2);
 
@@ -36,13 +36,12 @@ export default function CoursesPreview() {
 
         {/* Category Cards */}
         <div className="grid md:grid-cols-2 gap-10">
-          {/* Full-Time Card */}
+          {/** Full-Time Card **/}
           <div
             className="relative bg-white rounded-3xl shadow-lg border border-gray-200 p-8 cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl group"
             onClick={() => goToCourses("Full-Time")}
           >
             <div className="absolute inset-0 bg-gradient-to-t from-red-50 via-transparent opacity-0 group-hover:opacity-30 transition-opacity pointer-events-none rounded-3xl"></div>
-
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
                 <h3 className="text-2xl font-bold text-red-800 mb-4">
@@ -75,13 +74,12 @@ export default function CoursesPreview() {
             </div>
           </div>
 
-          {/* Part-Time Card */}
+          {/** Part-Time Card **/}
           <div
             className="relative bg-white rounded-3xl shadow-lg border border-gray-200 p-8 cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl group"
             onClick={() => goToCourses("Part-Time")}
           >
             <div className="absolute inset-0 bg-gradient-to-t from-red-50 via-transparent opacity-0 group-hover:opacity-30 transition-opacity pointer-events-none rounded-3xl"></div>
-
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
                 <h3 className="text-2xl font-bold text-red-800 mb-4">
