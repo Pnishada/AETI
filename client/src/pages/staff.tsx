@@ -41,6 +41,11 @@ const StaffPage: React.FC = () => {
         <h2 className="text-3xl font-bold text-center text-gray-900">
           Meet Our Team
         </h2>
+        <div className="text-3xl font-bold text-center text-red-700">
+          <h3>
+            Management and Academic Staff of AETI
+          </h3>
+        </div>
         <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {staffMembers.map((staff, index) => (
             <motion.div
