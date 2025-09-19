@@ -62,7 +62,7 @@ export default function ContactPage() {
           <div className="space-y-6">
             <div className="flex items-center gap-3">
               <Mail className="text-blue-600" />
-              <p className="text-gray-700">aetiparttime@gmail.com</p>
+              <p className="text-gray-700">diraeti@naita.gov.lk </p>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="text-green-600" />

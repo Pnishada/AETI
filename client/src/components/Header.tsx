@@ -15,11 +15,11 @@ export default function Header() {
     { name: "Home", route: "/" },
     { name: "Discover AETI", route: "/about" },
     { name: "Courses", route: "/courses" },
-    { name: "Downloads", route: "/download" },
     { name: "Gallery", route: "/gallery" },
     { name: "LMS", route: "/lms" },
     { name: "Contact Us", route: "/contact" },
     { name: "Staff", route: "/staff" },
+     { name: "Downloads", route: "/download" },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);

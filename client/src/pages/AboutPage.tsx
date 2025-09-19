@@ -134,15 +134,8 @@ const AboutPage: React.FC = () => {
                 Our Mission
               </h2>
               <p className="mt-4 text-gray-600">
-                To provide systematic training and develop technology-related
-                skills for students to perform at the highest professional
-                level. To produce employable graduates with strong technical
-                knowledge, practical skills, and a global outlook for the
-                sustainable future of the automotive industry. To foster human
-                potential for entrepreneurship and create responsible citizens
-                with strong ethical and social values. To maintain strong
-                industry linkages and facilitate continued learning, research,
-                and innovation within the automotive sector.
+                To be an institution of excellence in providing training in automobile and related trades to cater for the needs of the developing industries.
+
               </p>
             </CardContent>
           </Card>
@@ -153,11 +146,7 @@ const AboutPage: React.FC = () => {
                 Our Vision
               </h2>
               <p className="mt-4 text-gray-600">
-                To be the best Automotive Training Institute in the region. To
-                be a center of excellence imparting technical education and
-                producing skilled automobile engineers. To become a leading hub
-                for innovation and sustainable solutions in the automotive
-                sector.
+               To be an excellent training provider in the field of Automobile Engineering within the region of Asia.
               </p>
             </CardContent>
           </Card>
@@ -169,15 +158,14 @@ const AboutPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-gray-900">Why Choose AETI</h2>
           <p className="mt-4 text-gray-600">
-            We provide government-certified training, industry partnerships, and
-            nationwide training opportunities.
+            We provide government-certified training, industry partnerships,Overseas scholarships 
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             {[
               { icon: Building2, title: "Govt. Certified Training" },
               { icon: Award, title: "Industry Partnerships" },
-              { icon: Users, title: "Nationwide Training Centers" },
+              { icon: Users, title: "Overseas scholarships" },
             ].map((item, index) => (
               <motion.div
                 key={index}
