@@ -1,9 +1,12 @@
+"use client";
+
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useLocation } from "wouter";
 import CourseCard from "@/components/CourseCard";
 import EnrollFormDialog from "@/components/EnrollFormDialog";
 import CourseDetailsDialog from "@/components/CoursesDetailsDialog";
-import { Course, courses } from "@/data/Courses";
+import { Course } from "@/data/Courses"; // keep the type interface
+import { api } from "@/api/api";
 
 export default function CoursesPage() {
   const [location, setLocation] = useLocation();
@@ -14,6 +17,20 @@ export default function CoursesPage() {
   const [durationFilter, setDurationFilter] = useState("All");
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [enrollCourse, setEnrollCourse] = useState<Course | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]); // fetched from backend
+
+  // Fetch courses from backend
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const data = await api.getCourses();
+        setCourses(data);
+      } catch (err) {
+        console.error("Failed to fetch courses:", err);
+      }
+    };
+    fetchCourses();
+  }, []);
 
   // Read `type` from query params and update tab + scroll
   useEffect(() => {
@@ -50,7 +67,7 @@ export default function CoursesPage() {
     }
 
     return filtered;
-  }, [activeTab, search, durationFilter]);
+  }, [activeTab, search, durationFilter, courses]);
 
   // Available durations
   const availableDurations = useMemo(() => {
@@ -60,7 +77,7 @@ export default function CoursesPage() {
         : courses.filter((c) => c.type === activeTab);
 
     return ["All", ...Array.from(new Set(filteredCourses.map((c) => c.duration)))];
-  }, [activeTab]);
+  }, [activeTab, courses]);
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
@@ -76,7 +93,7 @@ export default function CoursesPage() {
             onClick={() => {
               setActiveTab(tab as "All" | "Full-Time" | "Part-Time");
               setDurationFilter("All");
-              setLocation(`/courses?type=${tab}`); // update URL
+              setLocation(`/courses?type=${tab}`);
               setTimeout(() => {
                 coursesRef.current?.scrollIntoView({ behavior: "smooth" });
               }, 200);

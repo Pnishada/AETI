@@ -1,32 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { api, GalleryItem } from "@/api/api";
 
 export default function Gallery() {
-  const [activeTab, setActiveTab] = useState("Photos");
+  const [activeTab, setActiveTab] = useState("Image");
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const galleryItems = [
-    { type: "Photos", image: "src/components/assets/Students_projects.webp", caption: "Students collaborating on engineering projects" },
-    { type: "Photos", image: "src/components/assets/training_workshop.webp", caption: "Advanced technical training workshop" },
-    { type: "Photos", image: "src/components/assets/lab_training_session.webp", caption: "Modern computer lab training session" },
-    { type: "Photos", image: "src/components/assets/training_program.webp", caption: "Hospitality training program" },
-    { type: "Photos", image: "src/components/assets/graduation_ceremony.webp", caption: "Apprenticeship graduation ceremony" },
-    { type: "Photos", image: "src/components/assets/training_facility.webp", caption: "Industrial training facility" },
-    { type: "Photos", image: "src/components/assets/skills_development_workshop.webp", caption: "Vocational skills development workshop" },
-    { type: "Photos", image: "src/components/assets/Healthcare_training.webp", caption: "Healthcare training program" },
-    { type: "Photos", image: "src/components/assets/training_center_building.webp", caption: "IETI training center building" },
-    { type: "Videos", image: "src/components/assets/video_thumbnail_1.webp", caption: "Introduction to IETI programs" },
-    { type: "Videos", image: "src/components/assets/video_thumbnail_2.webp", caption: "Student project showcase" },
-    { type: "YouTube", image: "src/components/assets/youtube_thumbnail_1.webp", caption: "Official IETI YouTube video" },
-    { type: "Events", image: "src/components/assets/event_1.webp", caption: "Annual training workshop" },
-    { type: "Events", image: "src/components/assets/event_2.webp", caption: "Graduation ceremony" },
-  ];
+  const tabs = ["Image", "Video"];
 
-  const tabs = ["Photos", "Videos", "YouTube", "Events"];
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const data = await api.getGallery();
+        setGalleryItems(data);
+      } catch (error) {
+        console.error("Failed to fetch gallery:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGallery();
+  }, []);
+
+  const getImageUrl = (path?: string) => {
+    if (!path) return "";
+    return path.startsWith("http") ? path : `http://127.0.0.1:8000${path}`;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-700 text-lg">Loading gallery...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#7b1e1e] via-[#5a0f0f] to-[#8b1e1e] text-white py-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
@@ -34,7 +47,8 @@ export default function Gallery() {
             Our Gallery
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto text-yellow-100 leading-relaxed drop-shadow-sm">
-            Explore AETI's programs, events, student achievements, and state-of-the-art facilities through our gallery.
+            Explore AETI's programs, events, student achievements, and state-of-the-art
+            facilities through our gallery.
           </p>
         </div>
       </section>
@@ -64,13 +78,13 @@ export default function Gallery() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {galleryItems
               .filter((item) => item.type === activeTab)
-              .map((item, index) => (
+              .map((item) => (
                 <div
-                  key={index}
+                  key={item.id}
                   className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500 cursor-pointer"
                 >
                   <img
-                    src={item.image}
+                    src={getImageUrl(item.image)}
                     alt={item.caption}
                     className="w-full h-72 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -84,7 +98,6 @@ export default function Gallery() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

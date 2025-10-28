@@ -1,35 +1,45 @@
-import React from "react"
-import { Download } from "lucide-react";
+"use client";
 
-const downloads = [
-  { 
-    title: "Full-time Course Application", 
-    file: "/files/fulltime-application.pdf", 
-    description: "Application form for full-time courses." 
-  },
-  { 
-    title: "Request for Confirmation of Certificates", 
-    file: "/files/certificate-confirmation.pdf", 
-    description: "Request official confirmation of your certificates." 
-  },
-  { 
-    title: "Registration as an In-Plant Training Provider", 
-    file: "/files/in-plant-registration.pdf", 
-    description: "Register as a certified in-plant training provider." 
-  },
-  { 
-    title: "Request Trainees for OJT/Industry", 
-    file: "/files/request-trainees.pdf", 
-    description: "Request trainees for on-the-job training or industrial placements." 
-  },
-  { 
-    title: "Attendance Form for In-Plant Trainees", 
-    file: "/files/attendance-form.pdf", 
-    description: "Record attendance for in-plant trainees." 
-  },
-];
+import React, { useEffect, useState } from "react";
+import { Download } from "lucide-react";
+import { api } from "@/api/api";
+
+interface DownloadItem {
+  id: number;
+  title: string;
+  file: string;
+  description: string;
+  uploaded_at: string;
+}
 
 export default function DownloadPage() {
+  const [downloads, setDownloads] = useState<DownloadItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchDownloads = async () => {
+    try {
+      const data = await api.getDownloads(); 
+      setDownloads(data);
+    } catch (error) {
+      console.error("Failed to fetch downloads:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchDownloads();
+}, []);
+
+
+  if (loading) {
+    return (
+      <main className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center">
+        <p className="text-gray-700 text-lg">Loading downloads...</p>
+      </main>
+    );
+  }
+
   return (
     <main className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -41,9 +51,9 @@ export default function DownloadPage() {
         </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {downloads.map((item, index) => (
+          {downloads.map((item) => (
             <div
-              key={index}
+              key={item.id}
               className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow hover:-translate-y-1 transform"
             >
               <div className="flex items-center space-x-4 mb-4">
