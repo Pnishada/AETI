@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { Course, courses } from "@/data/Courses";
+import { api, Course } from "@/api/api";
 import EnrollFormDialog from "@/components/EnrollFormDialog";
 import CourseDetailsDialog from "@/components/CoursesDetailsDialog";
 
 export default function CoursesPreview() {
   const [, setLocation] = useLocation();
+  const [courses, setCourses] = useState<Course[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [enrollCourse, setEnrollCourse] = useState<Course | null>(null);
 
-  // Preview courses (first 2 of each type)
-  const fullTime = courses.filter((c) => c.type === "Full-Time").slice(0, 2);
-  const partTime = courses.filter((c) => c.type === "Part-Time").slice(0, 2);
+  // Fetch courses from backend
+  useEffect(() => {
+    api
+      .getCourses()
+      .then((data) => setCourses(data))
+      .catch((error) => console.error("Failed to fetch courses:", error));
+  }, []);
+
+  // Filter types
+  const fullTime = courses.filter((c) => c.name.toLowerCase().includes("full")).slice(0, 2);
+  const partTime = courses.filter((c) => c.name.toLowerCase().includes("part")).slice(0, 2);
 
   const goToCourses = (type: "Full-Time" | "Part-Time") => {
     setLocation(`/courses?type=${type}`);
@@ -36,12 +45,12 @@ export default function CoursesPreview() {
 
         {/* Category Cards */}
         <div className="grid md:grid-cols-2 gap-10">
-          {/** Full-Time Card **/}
+          {/* Full-Time */}
           <div
             className="relative bg-white rounded-3xl shadow-lg border border-gray-200 p-8 cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl group"
             onClick={() => goToCourses("Full-Time")}
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-red-50 via-transparent opacity-0 group-hover:opacity-30 transition-opacity pointer-events-none rounded-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-red-50 via-transparent opacity-0 group-hover:opacity-30 transition-opacity rounded-3xl"></div>
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
                 <h3 className="text-2xl font-bold text-red-800 mb-4">
@@ -54,15 +63,25 @@ export default function CoursesPreview() {
                   {fullTime.map((course) => (
                     <div
                       key={course.id}
-                      className="relative w-24 h-24 rounded-lg overflow-hidden shadow-sm transform transition-transform duration-300 group-hover:scale-110"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedCourse(course);
+                      }}
+                      className="relative w-24 h-24 rounded-lg overflow-hidden shadow-sm transform transition-transform duration-300 hover:scale-110"
                     >
                       <img
-                        src={course.image}
-                        alt={course.title}
+                        src={
+                          course.image
+                            ? course.image.startsWith("http")
+                              ? course.image
+                              : `http://127.0.0.1:8000${course.image}`
+                            : "/default-course.jpg"
+                        }
+                        alt={course.name}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-semibold text-sm">
-                        {course.title}
+                      <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center text-white font-semibold text-sm">
+                        {course.name}
                       </div>
                     </div>
                   ))}
@@ -74,12 +93,12 @@ export default function CoursesPreview() {
             </div>
           </div>
 
-          {/** Part-Time Card **/}
+          {/* Part-Time */}
           <div
             className="relative bg-white rounded-3xl shadow-lg border border-gray-200 p-8 cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl group"
             onClick={() => goToCourses("Part-Time")}
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-red-50 via-transparent opacity-0 group-hover:opacity-30 transition-opacity pointer-events-none rounded-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-red-50 via-transparent opacity-0 group-hover:opacity-30 transition-opacity rounded-3xl"></div>
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
                 <h3 className="text-2xl font-bold text-red-800 mb-4">
@@ -92,15 +111,25 @@ export default function CoursesPreview() {
                   {partTime.map((course) => (
                     <div
                       key={course.id}
-                      className="relative w-24 h-24 rounded-lg overflow-hidden shadow-sm transform transition-transform duration-300 group-hover:scale-110"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedCourse(course);
+                      }}
+                      className="relative w-24 h-24 rounded-lg overflow-hidden shadow-sm transform transition-transform duration-300 hover:scale-110"
                     >
                       <img
-                        src={course.image}
-                        alt={course.title}
+                        src={
+                          course.image
+                            ? course.image.startsWith("http")
+                              ? course.image
+                              : `http://127.0.0.1:8000${course.image}`
+                            : "/default-course.jpg"
+                        }
+                        alt={course.name}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-semibold text-sm">
-                        {course.title}
+                      <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center text-white font-semibold text-sm">
+                        {course.name}
                       </div>
                     </div>
                   ))}
@@ -123,9 +152,10 @@ export default function CoursesPreview() {
           setEnrollCourse(c);
         }}
       />
+
       {enrollCourse && (
         <EnrollFormDialog
-          courseTitle={enrollCourse.title}
+          courseTitle={enrollCourse.name}
           open={!!enrollCourse}
           onClose={() => setEnrollCourse(null)}
         />

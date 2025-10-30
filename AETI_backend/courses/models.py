@@ -10,7 +10,7 @@ class Course(models.Model):
     type = models.CharField(max_length=50, choices=COURSE_TYPES)
     duration = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='courses/', default='default.jpg')
+    image = models.ImageField(upload_to='courses/', default='default.jpg', max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

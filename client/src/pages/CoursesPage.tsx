@@ -5,8 +5,8 @@ import { useLocation } from "wouter";
 import CourseCard from "@/components/CourseCard";
 import EnrollFormDialog from "@/components/EnrollFormDialog";
 import CourseDetailsDialog from "@/components/CoursesDetailsDialog";
-import { Course } from "@/data/Courses"; // keep the type interface
-import { api } from "@/api/api";
+import { Course, api } from "@/api/api"; 
+
 
 export default function CoursesPage() {
   const [location, setLocation] = useLocation();
@@ -17,7 +17,7 @@ export default function CoursesPage() {
   const [durationFilter, setDurationFilter] = useState("All");
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [enrollCourse, setEnrollCourse] = useState<Course | null>(null);
-  const [courses, setCourses] = useState<Course[]>([]); // fetched from backend
+  const [courses, setCourses] = useState<Course[]>([]);
 
   // Fetch courses from backend
   useEffect(() => {
@@ -32,13 +32,13 @@ export default function CoursesPage() {
     fetchCourses();
   }, []);
 
-  // Read `type` from query params and update tab + scroll
+  
   useEffect(() => {
     const queryParams = new URLSearchParams(location.split("?")[1]);
     const typeParam = queryParams.get("type");
 
     if (typeParam === "Full-Time" || typeParam === "Part-Time") {
-      setActiveTab(typeParam); // highlight the tab
+      setActiveTab(typeParam);
       setTimeout(() => {
         coursesRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 200);
@@ -52,12 +52,12 @@ export default function CoursesPage() {
     let filtered =
       activeTab === "All"
         ? courses
-        : courses.filter((c) => c.type === activeTab);
+        : courses.filter((c) => c.description?.includes(activeTab));
 
     if (search.trim()) {
       filtered = filtered.filter(
         (c) =>
-          c.title.toLowerCase().includes(search.toLowerCase()) ||
+          c.name.toLowerCase().includes(search.toLowerCase()) ||
           c.description.toLowerCase().includes(search.toLowerCase())
       );
     }
@@ -69,12 +69,12 @@ export default function CoursesPage() {
     return filtered;
   }, [activeTab, search, durationFilter, courses]);
 
-  // Available durations
+  //  Available durations
   const availableDurations = useMemo(() => {
     const filteredCourses =
       activeTab === "All"
         ? courses
-        : courses.filter((c) => c.type === activeTab);
+        : courses.filter((c) => c.description?.includes(activeTab));
 
     return ["All", ...Array.from(new Set(filteredCourses.map((c) => c.duration)))];
   }, [activeTab, courses]);
@@ -137,7 +137,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      {/* Courses Grid */}
+      {/*  Courses Grid */}
       <div ref={coursesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayedCourses.map((course) => (
           <CourseCard
@@ -159,7 +159,7 @@ export default function CoursesPage() {
       />
       {enrollCourse && (
         <EnrollFormDialog
-          courseTitle={enrollCourse.title}
+          courseTitle={enrollCourse.name}
           open={!!enrollCourse}
           onClose={() => setEnrollCourse(null)}
         />
