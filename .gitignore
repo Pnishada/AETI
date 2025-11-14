@@ -1,1 +1,35 @@
-node_modules
+# --- Python / Django ---
+AETI_backend/venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+media/
+staticfiles/
+static/
+
+# --- Environment & configs ---
+.env
+*.log
+
+# --- Node / React ---
+client/node_modules/
+client/.next/
+client/.cache/
+client/build/
+client/dist/
+frontend/node_modules/
+frontend/.next/
+frontend/.cache/
+frontend/build/
+frontend/dist/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Editor files ---
+.vscode/
+.idea/
+*.sublime-project
